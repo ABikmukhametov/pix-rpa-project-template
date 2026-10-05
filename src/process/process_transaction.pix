@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:i="http://www.w3.org/2001/XMLSchema-instance" z:Id="i1" xmlns:z="http://schemas.microsoft.com/2003/10/Serialization/" xmlns="http://schemas.datacontract.org/2004/07/BR.Logic">
+  <CompilationType>CSharp</CompilationType>
+  <Description>Новый скрипт без наполнения.</Description>
+  <Id>006c46fd-b1c6-4bb9-9f1a-eae5b0297c13</Id>
+  <Logic z:Id="i2" i:type="ExecutedStep">
+    <Childs>
+      <AbstractStep z:Id="i3" i:type="CommentStep">
+        <Childs />
+        <HeightOnFlowchart>50</HeightOnFlowchart>
+        <Id>12bfd794-1ec7-4453-b191-ac6e597ffc30</Id>
+        <Parent z:Ref="i2" />
+        <PositionOnFlowchart xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+        <PropertyValues />
+        <SelectedOptionId i:nil="true" />
+        <WidthOnFlowchart>360</WidthOnFlowchart>
+        <IsCollapsed>false</IsCollapsed>
+        <Text>### Описание
+Демонстрационный скрипт  
+Скрипт выполняет бизнес-логику атомарной транзакции: поэтапно открывает карточку аккаунта, проверяет данные на соответствие бизнес-правилам и устанавливает финальный статус обработки `"completed"` в контексте транзакции, следуя общей архитектуре обработки транзакций.
+
+| Направление | Аргумент | Тип | Описание |
+| :--- | :--- | :--- | :--- |
+| **InOut** | `global_context` | Dictionary&lt;System.String, System.Object&gt; | Глобальный контекст выполнения приложения. Содержит пути, конфигурации и динамические параметры. |
+| **InOut** | `transaction_info` | Dictionary&lt;System.String, System.Object&gt; | Накопительный словарь по текущей транзакции. |
+
+---</Text>
+      </AbstractStep>
+      <AbstractStep z:Id="i4" i:type="ExecutedStep">
+        <Childs>
+          <AbstractStep z:Id="i5" i:type="ExecutedStep">
+            <Childs />
+            <HeightOnFlowchart>50</HeightOnFlowchart>
+            <Id>568f32e1-8499-4cd2-8c5b-893e946ae6a5</Id>
+            <Parent z:Ref="i4" />
+            <PositionOnFlowchart xmlns:d7p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+            <PropertyValues>
+              <PropertyValue z:Id="i6">
+                <PropertyName>FilePath</PropertyName>
+                <_dataType>Expression</_dataType>
+                <_expression>@"process\draft\open_card.pix"</_expression>
+                <_screenShotBase64 i:nil="true" />
+                <_value i:nil="true" />
+                <_xpathSettings xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+              </PropertyValue>
+              <PropertyValue z:Id="i7">
+                <PropertyName>Parameters</PropertyName>
+                <_dataType>Value</_dataType>
+                <_expression i:nil="true" />
+                <_screenShotBase64 i:nil="true" />
+                <_value xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.Core" i:type="d9p1:ArrayOfArgumentItem">
+                  <d9p1:ArgumentItem z:Id="i8">
+                    <d9p1:ArgumentName>global_context</d9p1:ArgumentName>
+                    <d9p1:Description i:nil="true" />
+                    <d9p1:Expression>global_context</d9p1:Expression>
+                    <d9p1:IsRequired>false</d9p1:IsRequired>
+                    <d9p1:Type>Dictionary&lt;System.String, System.Object&gt;</d9p1:Type>
+                  </d9p1:ArgumentItem>
+                  <d9p1:ArgumentItem z:Id="i9">
+                    <d9p1:ArgumentName>transaction_info</d9p1:ArgumentName>
+                    <d9p1:Description i:nil="true" />
+                    <d9p1:Expression>transaction_info</d9p1:Expression>
+                    <d9p1:IsRequired>false</d9p1:IsRequired>
+                    <d9p1:Type>Dictionary&lt;System.String, System.Object&gt;</d9p1:Type>
+                  </d9p1:ArgumentItem>
+                </_value>
+                <_xpathSettings xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+              </PropertyValue>
+            </PropertyValues>
+            <SelectedOptionId i:nil="true" />
+            <WidthOnFlowchart>360</WidthOnFlowchart>
+            <AutoCloseMode>None</AutoCloseMode>
+            <EnableStatus>true</EnableStatus>
+            <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+            <RetryCount>-1</RetryCount>
+            <Text></Text>
+            <_activityFullName>BR.Core.Base.ExecuteScript</_activityFullName>
+          </AbstractStep>
+        </Childs>
+        <HeightOnFlowchart i:nil="true" />
+        <Id>9ce4b068-b056-420d-be90-fb696569e469</Id>
+        <Parent z:Ref="i2" />
+        <PositionOnFlowchart xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+        <PropertyValues />
+        <SelectedOptionId i:nil="true" />
+        <WidthOnFlowchart i:nil="true" />
+        <AutoCloseMode>None</AutoCloseMode>
+        <EnableStatus>true</EnableStatus>
+        <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+        <RetryCount>-1</RetryCount>
+        <Text>[Псевдо-блок]
+1. ОТКРЫТЬ КАРТОЧКУ АККАУНТА</Text>
+        <_activityFullName>BR.Core.Base.Container</_activityFullName>
+      </AbstractStep>
+      <AbstractStep z:Id="i10" i:type="ExecutedStep">
+        <Childs>
+          <AbstractStep z:Id="i11" i:type="ExecutedStep">
+            <Childs />
+            <HeightOnFlowchart>50</HeightOnFlowchart>
+            <Id>ca7afc03-5246-4971-9bf5-86fc028e616c</Id>
+            <Parent z:Ref="i10" />
+            <PositionOnFlowchart xmlns:d7p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+            <PropertyValues>
+              <PropertyValue z:Id="i12">
+                <PropertyName>FilePath</PropertyName>
+                <_dataType>Expression</_dataType>
+                <_expression>@"process\draft\check_business_rules.pix"</_expression>
+                <_screenShotBase64 i:nil="true" />
+                <_value i:nil="true" />
+                <_xpathSettings xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+              </PropertyValue>
+              <PropertyValue z:Id="i13">
+                <PropertyName>Parameters</PropertyName>
+                <_dataType>Value</_dataType>
+                <_expression i:nil="true" />
+                <_screenShotBase64 i:nil="true" />
+                <_value xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.Core" i:type="d9p1:ArrayOfArgumentItem">
+                  <d9p1:ArgumentItem z:Id="i14">
+                    <d9p1:ArgumentName>global_context</d9p1:ArgumentName>
+                    <d9p1:Description i:nil="true" />
+                    <d9p1:Expression>global_context</d9p1:Expression>
+                    <d9p1:IsRequired>false</d9p1:IsRequired>
+                    <d9p1:Type>Dictionary&lt;System.String, System.Object&gt;</d9p1:Type>
+                  </d9p1:ArgumentItem>
+                  <d9p1:ArgumentItem z:Id="i15">
+                    <d9p1:ArgumentName>transaction_info</d9p1:ArgumentName>
+                    <d9p1:Description i:nil="true" />
+                    <d9p1:Expression>transaction_info</d9p1:Expression>
+                    <d9p1:IsRequired>false</d9p1:IsRequired>
+                    <d9p1:Type>Dictionary&lt;System.String, System.Object&gt;</d9p1:Type>
+                  </d9p1:ArgumentItem>
+                </_value>
+                <_xpathSettings xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+              </PropertyValue>
+            </PropertyValues>
+            <SelectedOptionId i:nil="true" />
+            <WidthOnFlowchart>360</WidthOnFlowchart>
+            <AutoCloseMode>None</AutoCloseMode>
+            <EnableStatus>true</EnableStatus>
+            <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+            <RetryCount>-1</RetryCount>
+            <Text></Text>
+            <_activityFullName>BR.Core.Base.ExecuteScript</_activityFullName>
+          </AbstractStep>
+        </Childs>
+        <HeightOnFlowchart i:nil="true" />
+        <Id>1780b143-1967-43b1-be01-c32984a59914</Id>
+        <Parent z:Ref="i2" />
+        <PositionOnFlowchart xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+        <PropertyValues />
+        <SelectedOptionId i:nil="true" />
+        <WidthOnFlowchart i:nil="true" />
+        <AutoCloseMode>None</AutoCloseMode>
+        <EnableStatus>true</EnableStatus>
+        <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+        <RetryCount>-1</RetryCount>
+        <Text>[Псевдо-блок]
+2. ПРОВЕРКА ДАННЫХ НА СООТВЕТСТВИЕ БИЗНЕС-ПРАВИЛАМ</Text>
+        <_activityFullName>BR.Core.Base.Container</_activityFullName>
+      </AbstractStep>
+      <AbstractStep z:Id="i16" i:type="ExecutedStep">
+        <Childs />
+        <HeightOnFlowchart>50</HeightOnFlowchart>
+        <Id>74592956-58be-48cf-9eb6-deb0c1134edd</Id>
+        <Parent z:Ref="i2" />
+        <PositionOnFlowchart xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+        <PropertyValues>
+          <PropertyValue z:Id="i17">
+            <PropertyName>Value</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>"completed"</_expression>
+            <_screenShotBase64 i:nil="true" />
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+          <PropertyValue z:Id="i18">
+            <PropertyName>To</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>transaction_info["rpa_status"]</_expression>
+            <_screenShotBase64 i:nil="true" />
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+        </PropertyValues>
+        <SelectedOptionId i:nil="true" />
+        <WidthOnFlowchart>360</WidthOnFlowchart>
+        <AutoCloseMode>None</AutoCloseMode>
+        <EnableStatus>true</EnableStatus>
+        <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+        <RetryCount>-1</RetryCount>
+        <Text></Text>
+        <_activityFullName>BR.Core.Base.Assign</_activityFullName>
+      </AbstractStep>
+    </Childs>
+    <HeightOnFlowchart i:nil="true" />
+    <Id>3b54ef50-45f1-4ddf-a484-99aa7551ba82</Id>
+    <Parent i:nil="true" />
+    <PositionOnFlowchart xmlns:d3p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+    <PropertyValues />
+    <SelectedOptionId i:nil="true" />
+    <WidthOnFlowchart i:nil="true" />
+    <AutoCloseMode>None</AutoCloseMode>
+    <EnableStatus>true</EnableStatus>
+    <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+    <RetryCount>-1</RetryCount>
+    <Text></Text>
+    <_activityFullName>BR.Core.Base.Container</_activityFullName>
+  </Logic>
+  <Name>process_transaction.pix</Name>
+  <Namespaces xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <Params>
+    <Parameter z:Id="i19">
+      <DefaultValueExpression>new Dictionary&lt;string, object&gt;()</DefaultValueExpression>
+      <Description>Глобальный контекст выполнения приложения. Содержит пути, конфигурации и динамические параметры.</Description>
+      <Name>global_context</Name>
+      <RunnerType>None</RunnerType>
+      <TypeString>System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]</TypeString>
+    </Parameter>
+    <Parameter z:Id="i20">
+      <DefaultValueExpression>new Dictionary&lt;string, object&gt;()</DefaultValueExpression>
+      <Description>Накопительный словарь по текущей транзакции</Description>
+      <Name>transaction_info</Name>
+      <RunnerType>None</RunnerType>
+      <TypeString>System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]</TypeString>
+    </Parameter>
+  </Params>
+  <PlatformVersion xmlns:d2p1="http://schemas.datacontract.org/2004/07/System" xmlns="">
+    <d2p1:_Build>1</d2p1:_Build>
+    <d2p1:_Major>3</d2p1:_Major>
+    <d2p1:_Minor>2</d2p1:_Minor>
+    <d2p1:_Revision>0</d2p1:_Revision>
+  </PlatformVersion>
+  <TemplateVersion xmlns:d2p1="http://schemas.datacontract.org/2004/07/System" i:nil="true" />
+  <Variables xmlns:d2p1="http://schemas.datacontract.org/2004/07/BR.Logic.Params">
+    <d2p1:Variable z:Id="i21">
+      <d2p1:DefaultValueExpression>"process_transaction.pix"</d2p1:DefaultValueExpression>
+      <d2p1:Description>Наименование текущего скрипта, используется в логировании.</d2p1:Description>
+      <d2p1:Name>script_name</d2p1:Name>
+      <d2p1:TypeString>System.String</d2p1:TypeString>
+    </d2p1:Variable>
+  </Variables>
+  <Version i:nil="true" />
+</Script>

@@ -1,0 +1,129 @@
+{
+    "metadata": {
+        "version": "3.0",
+        "description": "Конфигурация RPA-процесса",
+        "contact_us": "ARBikmuhametov@yandex.ru"
+    },
+    "process": {
+        "_comment_name": "Используется в Email-уведомлениях и заголовках логов. Пример: 'Автоматизация выгрузки данных из 1С'",
+        "name": "RPA Project template",
+        "_comment_log_config_on_init": "Параметр отвечает за логирование текущей конфигурации. true - логирование включено",
+        "log_config_on_init": false,
+        "_comment_log_state_monitor": "Параметр отвечает за логирование состояния машины. true - логирование включено",
+        "log_state_monitor": false
+    },
+    "transaction_handling": {
+        "_comment_max_serial_errors": "Максимальное количество глобальных ошибок подряд перед остановкой",
+        "max_serial_errors": 3,
+        "_comment_max_batch_size": "Максимальное количество транзакций в активной партии",
+        "max_batch_size": 8,
+        "_comment_seconds_per_transaction": "Оценочное время в секундах на обработку одной транзакции",
+        "seconds_per_transaction": 16,
+        "_comment_base_delay_sec": "Экспоненциальная задержка между попытками на основании базовой задержки. Каждая следующая попытка удваивает задержку после системной ошибки",
+        "base_delay_sec": 10,
+        "_comment_notification": "Позволяет включить уведомление о каждой N-ой итерации",
+        "notification": {
+            "enabled": false,
+            "interval": 5
+        },
+        "_comment_eta_calibration": "Автоматическая калибровка seconds_per_transaction из архивных данных за последние N дней (history_days). Если включено — после ротации собирает rpa_duration_sec из архивных CSV и пересчитывает среднее. Минимум собранных значений для перерасчёта задаётся min_sample_count — если данных меньше, калибровка пропускается",
+        "eta_calibration": {
+            "enabled": true,
+            "history_days": 7,
+            "min_sample_count": 5
+        }
+    },
+    "maintenance": {
+        "_comment": "Тех. окна по одному cron-выражению. Если время попадает под любой из указанных дней/часов — робот не работает.",
+        "enabled": false,
+        "cron": "* * 10-16 ? * MON,TUE,WED,THU,FRI *",
+        "_comment_cron": "С 10:00 до 16:00 с понедельника по пятницу",
+        "window_ahead_min": 10,
+        "_comment_window_ahead_min": "Минимальное количество минут до наступления технического окна, которое должно оставаться для запуска новой транзакции. Например, если до начала тех. окна осталось меньше 10 минут, новая обработка не запустится."
+    },
+    "credentials": {
+        "_comment_names": "Имена учетных данных из диспетчера учетных данных, либо ключи данных из Pix Master",
+        "names": [
+            "Email",
+            "erp",
+            "sklad"
+        ]
+    },
+    "notifications": {
+        "_comment_recipients": "Email-адреса через запятую (обязательно валидный формат)",
+        "recipients": [
+            "your-email@example.com"
+        ],
+        "smtp": {
+            "_comment": "Порт 25 (без шифрования) или 587 (с шифрованием)",
+            "server": "smtp.yandex.ru",
+            "port": 587
+        },
+        "imap": {
+            "_comment": "Порт 143 (без шифрования) или 993 (с шифрованием)",
+            "server": "imap.yandex.ru",
+            "port": 993
+        },
+        "_comment_ssl": "Используется для активации/снятия флага \"Использовать SSL\" в `...\\send_report.pix' и `...\\send_error_report.pix'",
+        "ssl": true
+    },
+    "production_calendar": {
+        "_comment_enabled": "Учет производственного календаря при запусках, true/false",
+        "enabled": false,
+        "_comment_country": "Варианты стран: Россия - ru, Казахстан - kz, Беларусь - by, Узбекистан - uz, Украина - ua",
+        "country": "ru"
+    },
+    "1c_settings": [
+        {
+            "_comment_base_name": "Имя базы, которое будет являться ключом для запуска в `global_context[\"selected_1c_base\"]`",
+            "base_name" : "erp",
+            "_comment_credentials_key": "Имя ресурса из credentials.names. По нему будут найдены <имя>_login и <имя>_password в глобальном контексте",
+            "credentials_key": "erp",
+            "_comment_base_type": "Тип базы 1С: серверная (server: /S), файловая (file: /F), веб-публикация (web: /WS)",
+            "base_type": "server",
+            "_comment_platform_path": "Полный путь до исполняемого файла платформы 1С. Пример: C:\\Program Files\\1cv8\\<НомерВерсииПлатформы>\\bin\\1cv8.exe",
+            "platform_path": "C:\\Program Files\\1cv8\\8.3.21.5\\bin\\1cv8.exe",
+            "_comment_base_path": "Формат для server: [Сервер]\\[ИмяБазы]; для file: путь к базе (например, D:\\Bases\\Base1); для web: URL публикации",
+            "base_path": "ServerName\\erp",
+            "_comment_connection_timeout": "Максимальное время ожидания подключения к базе в секундах",
+            "connection_timeout": 12
+        },
+        {
+            "_comment_base_name": "Имя базы, которое будет являться ключом для запуска в `global_context[\"selected_1c_base\"]`",
+            "base_name" : "sklad",
+            "_comment_credentials_key": "Имя ресурса из credentials.names. По нему будут найдены <имя>_login и <имя>_password в глобальном контексте",
+            "credentials_key": "sklad",
+            "_comment_base_type": "Тип базы 1С: серверная (server: /S), файловая (file: /F), веб-публикация (web: /WS)",
+            "base_type": "file",
+            "_comment_platform_path": "Полный путь до исполняемого файла платформы 1С. Пример: C:\\Program Files\\1cv8\\<НомерВерсииПлатформы>\\bin\\1cv8.exe",
+            "platform_path": "C:\\Program Files\\1cv8\\8.3.20.1\\bin\\1cv8.exe",
+            "_comment_base_path": "Формат для server: [Сервер]\\[ИмяБазы]; для file: путь к базе (например, D:\\Bases\\Base1); для web: URL публикации",
+            "base_path": "D:\\Bases\\Base1",
+            "_comment_connection_timeout": "Максимальное время ожидания подключения к базе в секундах",
+            "connection_timeout": 24
+        }
+    ],
+    "cleanup": {
+        "processes": {
+            "_comment": "Процессы, требующие завершения",
+            "names": [
+                "excel",
+                "firefox"
+            ]
+        },
+        "transactions": {
+            "_comment_lifetime": "Время хранения архивных транзакций. Файлы старше этого периода будут удалены",
+            "lifetime_days": 30
+        },
+        "logs": {
+            "_comment_lifetime": "Время хранения логов в днях. Файлы старше этого периода будут удалены",
+            "lifetime_days": 30,
+            "_comment_archive": "Если true - архивировать логи вместо удаления",
+            "archive_instead_of_delete": true
+        },
+        "errors": {
+            "_comment_lifetime": "Время хранения скриншотов ошибок в днях. Файлы старше этого периода будут удалены",
+            "lifetime_days": 30
+        }
+    }
+}

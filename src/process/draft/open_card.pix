@@ -1,0 +1,763 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:i="http://www.w3.org/2001/XMLSchema-instance" z:Id="i1" xmlns:z="http://schemas.microsoft.com/2003/10/Serialization/" xmlns="http://schemas.datacontract.org/2004/07/BR.Logic">
+  <CompilationType>CSharp</CompilationType>
+  <Description>Новый скрипт без наполнения.</Description>
+  <Id>d47f6f4c-8e16-4107-b151-6bc22219a53b</Id>
+  <Logic z:Id="i2" i:type="ExecutedStep">
+    <Childs>
+      <AbstractStep z:Id="i3" i:type="CommentStep">
+        <Childs />
+        <HeightOnFlowchart>50</HeightOnFlowchart>
+        <Id>4e98b167-0129-4ae0-b184-28539e8ad150</Id>
+        <Parent z:Ref="i2" />
+        <PositionOnFlowchart xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+        <PropertyValues />
+        <SelectedOptionId i:nil="true" />
+        <WidthOnFlowchart>360</WidthOnFlowchart>
+        <IsCollapsed>false</IsCollapsed>
+        <Text>### Описание
+Демонстрационный скрипт
+___</Text>
+      </AbstractStep>
+      <AbstractStep z:Id="i4" i:type="ExecutedStep">
+        <Childs>
+          <AbstractStep z:Id="i5" i:type="ExecutedStep">
+            <Childs />
+            <HeightOnFlowchart>50</HeightOnFlowchart>
+            <Id>bb3ddcfe-0d60-479e-a2c3-586acec06d88</Id>
+            <Parent z:Ref="i4" />
+            <PositionOnFlowchart xmlns:d7p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+            <PropertyValues>
+              <PropertyValue z:Id="i6">
+                <PropertyName>Text</PropertyName>
+                <_dataType>Expression</_dataType>
+                <_expression>@"1. ПОДГОТОВКА ПОИСКА
+   • Активировать фильтры таблицы
+   • Установить параметры поиска:
+     - Тип карточки: Клиентская
+     - Статус: Активная
+   • Сбросить предыдущие условия фильтрации"</_expression>
+                <_screenShotBase64 i:nil="true" />
+                <_value i:nil="true" />
+                <_xpathSettings xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+              </PropertyValue>
+              <PropertyValue z:Id="i7">
+                <PropertyName>Timeout</PropertyName>
+                <_dataType>Expression</_dataType>
+                <_expression>2</_expression>
+                <_screenShotBase64 i:nil="true" />
+                <_value i:nil="true" />
+                <_xpathSettings xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+              </PropertyValue>
+              <PropertyValue z:Id="i8">
+                <PropertyName>Title</PropertyName>
+                <_dataType>Expression</_dataType>
+                <_expression>$"Транзакция: {(int)transaction_info["transaction_index"]+1}"</_expression>
+                <_screenShotBase64 i:nil="true" />
+                <_value i:nil="true" />
+                <_xpathSettings xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+              </PropertyValue>
+            </PropertyValues>
+            <SelectedOptionId i:nil="true" />
+            <WidthOnFlowchart>360</WidthOnFlowchart>
+            <AutoCloseMode>None</AutoCloseMode>
+            <EnableStatus>true</EnableStatus>
+            <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+            <RetryCount>-1</RetryCount>
+            <Text></Text>
+            <_activityFullName>Activities.Interactive.MessageBox</_activityFullName>
+          </AbstractStep>
+        </Childs>
+        <HeightOnFlowchart i:nil="true" />
+        <Id>00e2f338-9b27-4214-afd4-c0511b17b273</Id>
+        <Parent z:Ref="i2" />
+        <PositionOnFlowchart xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+        <PropertyValues />
+        <SelectedOptionId i:nil="true" />
+        <WidthOnFlowchart i:nil="true" />
+        <AutoCloseMode>None</AutoCloseMode>
+        <EnableStatus>true</EnableStatus>
+        <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+        <RetryCount>-1</RetryCount>
+        <Text>1. Подготовка к поиску</Text>
+        <_activityFullName>BR.Core.Base.Container</_activityFullName>
+      </AbstractStep>
+      <AbstractStep z:Id="i9" i:type="ExecutedStep">
+        <Childs>
+          <AbstractStep z:Id="i10" i:type="ExecutedStep">
+            <Childs />
+            <HeightOnFlowchart>50</HeightOnFlowchart>
+            <Id>b1b75859-fba7-4a9a-adf2-480fa8faa0f4</Id>
+            <Parent z:Ref="i9" />
+            <PositionOnFlowchart xmlns:d7p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+            <PropertyValues>
+              <PropertyValue z:Id="i11">
+                <PropertyName>Text</PropertyName>
+                <_dataType>Expression</_dataType>
+                <_expression>@"2. ВЫПОЛНЕНИЕ ПОИСКА
+   • Ввести уникальный идентификатор карточки
+   • Применить расширенные критерии поиска:
+     - Дата создания: последние 30 дней
+     - Регион: Центральный
+   • Инициировать поиск (кнопка ""Применить"")"</_expression>
+                <_screenShotBase64 i:nil="true" />
+                <_value i:nil="true" />
+                <_xpathSettings xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+              </PropertyValue>
+              <PropertyValue z:Id="i12">
+                <PropertyName>Timeout</PropertyName>
+                <_dataType>Expression</_dataType>
+                <_expression>2</_expression>
+                <_screenShotBase64 i:nil="true" />
+                <_value i:nil="true" />
+                <_xpathSettings xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+              </PropertyValue>
+              <PropertyValue z:Id="i13">
+                <PropertyName>Title</PropertyName>
+                <_dataType>Expression</_dataType>
+                <_expression>$"Транзакция: {(int)transaction_info["transaction_index"]+1}"</_expression>
+                <_screenShotBase64 i:nil="true" />
+                <_value i:nil="true" />
+                <_xpathSettings xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+              </PropertyValue>
+            </PropertyValues>
+            <SelectedOptionId i:nil="true" />
+            <WidthOnFlowchart>360</WidthOnFlowchart>
+            <AutoCloseMode>None</AutoCloseMode>
+            <EnableStatus>true</EnableStatus>
+            <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+            <RetryCount>-1</RetryCount>
+            <Text></Text>
+            <_activityFullName>Activities.Interactive.MessageBox</_activityFullName>
+          </AbstractStep>
+        </Childs>
+        <HeightOnFlowchart i:nil="true" />
+        <Id>98eeed66-4529-4413-bf6f-e51f9cbc5adb</Id>
+        <Parent z:Ref="i2" />
+        <PositionOnFlowchart xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+        <PropertyValues />
+        <SelectedOptionId i:nil="true" />
+        <WidthOnFlowchart i:nil="true" />
+        <AutoCloseMode>None</AutoCloseMode>
+        <EnableStatus>true</EnableStatus>
+        <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+        <RetryCount>-1</RetryCount>
+        <Text>2. Выполнение поиска</Text>
+        <_activityFullName>BR.Core.Base.Container</_activityFullName>
+      </AbstractStep>
+      <AbstractStep z:Id="i14" i:type="ExecutedStep">
+        <Childs>
+          <AbstractStep z:Id="i15" i:type="ExecutedStep">
+            <Childs />
+            <HeightOnFlowchart>50</HeightOnFlowchart>
+            <Id>eeeef913-7e53-4878-ac55-431c81fd1b4b</Id>
+            <Parent z:Ref="i14" />
+            <PositionOnFlowchart xmlns:d7p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+            <PropertyValues>
+              <PropertyValue z:Id="i16">
+                <PropertyName>Text</PropertyName>
+                <_dataType>Expression</_dataType>
+                <_expression>@"3. ОТКРЫТИЕ КАРТОЧКИ
+   • Двойной клик по целевой строке таблицы
+   • Альтернатива: Выделить + кнопка ""Открыть детали""
+   • Ожидать появления заголовка карточки"</_expression>
+                <_screenShotBase64 i:nil="true" />
+                <_value i:nil="true" />
+                <_xpathSettings xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+              </PropertyValue>
+              <PropertyValue z:Id="i17">
+                <PropertyName>Timeout</PropertyName>
+                <_dataType>Expression</_dataType>
+                <_expression>2</_expression>
+                <_screenShotBase64 i:nil="true" />
+                <_value i:nil="true" />
+                <_xpathSettings xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+              </PropertyValue>
+              <PropertyValue z:Id="i18">
+                <PropertyName>Title</PropertyName>
+                <_dataType>Expression</_dataType>
+                <_expression>$"Транзакция: {(int)transaction_info["transaction_index"]+1}"</_expression>
+                <_screenShotBase64 i:nil="true" />
+                <_value i:nil="true" />
+                <_xpathSettings xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+              </PropertyValue>
+            </PropertyValues>
+            <SelectedOptionId i:nil="true" />
+            <WidthOnFlowchart>360</WidthOnFlowchart>
+            <AutoCloseMode>None</AutoCloseMode>
+            <EnableStatus>true</EnableStatus>
+            <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+            <RetryCount>-1</RetryCount>
+            <Text></Text>
+            <_activityFullName>Activities.Interactive.MessageBox</_activityFullName>
+          </AbstractStep>
+          <AbstractStep z:Id="i19" i:type="ExecutedStep">
+            <Childs>
+              <AbstractStep z:Id="i20" i:type="ExecutedStep">
+                <Childs>
+                  <AbstractStep z:Id="i21" i:type="ExecutedStep">
+                    <Childs>
+                      <AbstractStep z:Id="i22" i:type="ExecutedStep">
+                        <Childs>
+                          <AbstractStep z:Id="i23" i:type="ExecutedStep">
+                            <Childs />
+                            <HeightOnFlowchart>50</HeightOnFlowchart>
+                            <Id>62739c05-e61d-4c21-aceb-cfa3dbbad6f3</Id>
+                            <Parent z:Ref="i22" />
+                            <PositionOnFlowchart xmlns:d15p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+                            <PropertyValues>
+                              <PropertyValue z:Id="i24">
+                                <PropertyName>Timeout</PropertyName>
+                                <_dataType>Expression</_dataType>
+                                <_expression>3</_expression>
+                                <_screenShotBase64 i:nil="true" />
+                                <_value i:nil="true" />
+                                <_xpathSettings xmlns:d17p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+                              </PropertyValue>
+                              <PropertyValue z:Id="i25">
+                                <PropertyName>XPath</PropertyName>
+                                <_dataType>XPath</_dataType>
+                                <_expression i:nil="true" />
+                                <_screenShotBase64 i:nil="true" />
+                                <_value i:nil="true" />
+                                <_xpathSettings xmlns:d17p1="http://schemas.datacontract.org/2004/07/BR.XPath" z:Id="i26">
+                                  <d17p1:Nodes xmlns:d18p1="http://schemas.datacontract.org/2004/07/System.Collections.ObjectModel">
+                                    <d18p1:list>
+                                      <d17p1:XPathNode z:Id="i27">
+                                        <d17p1:AttributeOperators xmlns:d21p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                                          <d21p1:string>and</d21p1:string>
+                                          <d21p1:string>and</d21p1:string>
+                                          <d21p1:string>and</d21p1:string>
+                                          <d21p1:string>and</d21p1:string>
+                                          <d21p1:string>and</d21p1:string>
+                                          <d21p1:string>and</d21p1:string>
+                                          <d21p1:string>and</d21p1:string>
+                                          <d21p1:string>and</d21p1:string>
+                                          <d21p1:string>and</d21p1:string>
+                                          <d21p1:string>and</d21p1:string>
+                                          <d21p1:string>and</d21p1:string>
+                                          <d21p1:string>and</d21p1:string>
+                                          <d21p1:string>and</d21p1:string>
+                                          <d21p1:string>and</d21p1:string>
+                                          <d21p1:string>and</d21p1:string>
+                                          <d21p1:string>and</d21p1:string>
+                                          <d21p1:string>and</d21p1:string>
+                                          <d21p1:string>and</d21p1:string>
+                                          <d21p1:string>and</d21p1:string>
+                                        </d17p1:AttributeOperators>
+                                        <d17p1:Attributes>
+                                          <d18p1:list>
+                                            <d17p1:XPathAttribute z:Id="i28">
+                                              <d17p1:IsEnabled>false</d17p1:IsEnabled>
+                                              <d17p1:IsPositionAttribute>true</d17p1:IsPositionAttribute>
+                                              <d17p1:Operator>Equal</d17p1:Operator>
+                                              <d17p1:Value>5</d17p1:Value>
+                                              <d17p1:_isCSharpExpression>false</d17p1:_isCSharpExpression>
+                                              <d17p1:_name></d17p1:_name>
+                                            </d17p1:XPathAttribute>
+                                            <d17p1:XPathAttribute z:Id="i29">
+                                              <d17p1:IsEnabled>true</d17p1:IsEnabled>
+                                              <d17p1:IsPositionAttribute>false</d17p1:IsPositionAttribute>
+                                              <d17p1:Operator>Equal</d17p1:Operator>
+                                              <d17p1:Value>'Notepad'</d17p1:Value>
+                                              <d17p1:_isCSharpExpression>false</d17p1:_isCSharpExpression>
+                                              <d17p1:_name>ClassName</d17p1:_name>
+                                            </d17p1:XPathAttribute>
+                                            <d17p1:XPathAttribute z:Id="i30">
+                                              <d17p1:IsEnabled>false</d17p1:IsEnabled>
+                                              <d17p1:IsPositionAttribute>false</d17p1:IsPositionAttribute>
+                                              <d17p1:Operator>Equal</d17p1:Operator>
+                                              <d17p1:Value>'Window'</d17p1:Value>
+                                              <d17p1:_isCSharpExpression>false</d17p1:_isCSharpExpression>
+                                              <d17p1:_name>ControlType</d17p1:_name>
+                                            </d17p1:XPathAttribute>
+                                            <d17p1:XPathAttribute z:Id="i31">
+                                              <d17p1:IsEnabled>false</d17p1:IsEnabled>
+                                              <d17p1:IsPositionAttribute>false</d17p1:IsPositionAttribute>
+                                              <d17p1:Operator>Equal</d17p1:Operator>
+                                              <d17p1:Value>'Win32'</d17p1:Value>
+                                              <d17p1:_isCSharpExpression>false</d17p1:_isCSharpExpression>
+                                              <d17p1:_name>FrameworkId</d17p1:_name>
+                                            </d17p1:XPathAttribute>
+                                            <d17p1:XPathAttribute z:Id="i32">
+                                              <d17p1:IsEnabled>false</d17p1:IsEnabled>
+                                              <d17p1:IsPositionAttribute>false</d17p1:IsPositionAttribute>
+                                              <d17p1:Operator>Equal</d17p1:Operator>
+                                              <d17p1:Value>'False'</d17p1:Value>
+                                              <d17p1:_isCSharpExpression>false</d17p1:_isCSharpExpression>
+                                              <d17p1:_name>IsDialog</d17p1:_name>
+                                            </d17p1:XPathAttribute>
+                                            <d17p1:XPathAttribute z:Id="i33">
+                                              <d17p1:IsEnabled>false</d17p1:IsEnabled>
+                                              <d17p1:IsPositionAttribute>false</d17p1:IsPositionAttribute>
+                                              <d17p1:Operator>Equal</d17p1:Operator>
+                                              <d17p1:Value>'True'</d17p1:Value>
+                                              <d17p1:_isCSharpExpression>false</d17p1:_isCSharpExpression>
+                                              <d17p1:_name>IsEnabled</d17p1:_name>
+                                            </d17p1:XPathAttribute>
+                                            <d17p1:XPathAttribute z:Id="i34">
+                                              <d17p1:IsEnabled>false</d17p1:IsEnabled>
+                                              <d17p1:IsPositionAttribute>false</d17p1:IsPositionAttribute>
+                                              <d17p1:Operator>Equal</d17p1:Operator>
+                                              <d17p1:Value>'True'</d17p1:Value>
+                                              <d17p1:_isCSharpExpression>false</d17p1:_isCSharpExpression>
+                                              <d17p1:_name>IsKeyboardFocusable</d17p1:_name>
+                                            </d17p1:XPathAttribute>
+                                            <d17p1:XPathAttribute z:Id="i35">
+                                              <d17p1:IsEnabled>false</d17p1:IsEnabled>
+                                              <d17p1:IsPositionAttribute>false</d17p1:IsPositionAttribute>
+                                              <d17p1:Operator>Equal</d17p1:Operator>
+                                              <d17p1:Value>'False'</d17p1:Value>
+                                              <d17p1:_isCSharpExpression>false</d17p1:_isCSharpExpression>
+                                              <d17p1:_name>IsOffscreen</d17p1:_name>
+                                            </d17p1:XPathAttribute>
+                                            <d17p1:XPathAttribute z:Id="i36">
+                                              <d17p1:IsEnabled>false</d17p1:IsEnabled>
+                                              <d17p1:IsPositionAttribute>false</d17p1:IsPositionAttribute>
+                                              <d17p1:Operator>Equal</d17p1:Operator>
+                                              <d17p1:Value>'False'</d17p1:Value>
+                                              <d17p1:_isCSharpExpression>false</d17p1:_isCSharpExpression>
+                                              <d17p1:_name>IsPassword</d17p1:_name>
+                                            </d17p1:XPathAttribute>
+                                            <d17p1:XPathAttribute z:Id="i37">
+                                              <d17p1:IsEnabled>false</d17p1:IsEnabled>
+                                              <d17p1:IsPositionAttribute>false</d17p1:IsPositionAttribute>
+                                              <d17p1:Operator>Equal</d17p1:Operator>
+                                              <d17p1:Value>'окно'</d17p1:Value>
+                                              <d17p1:_isCSharpExpression>false</d17p1:_isCSharpExpression>
+                                              <d17p1:_name>LocalizedControlType</d17p1:_name>
+                                            </d17p1:XPathAttribute>
+                                            <d17p1:XPathAttribute z:Id="i38">
+                                              <d17p1:IsEnabled>false</d17p1:IsEnabled>
+                                              <d17p1:IsPositionAttribute>false</d17p1:IsPositionAttribute>
+                                              <d17p1:Operator>Equal</d17p1:Operator>
+                                              <d17p1:Value>'example.ps1'</d17p1:Value>
+                                              <d17p1:_isCSharpExpression>false</d17p1:_isCSharpExpression>
+                                              <d17p1:_name>Name</d17p1:_name>
+                                            </d17p1:XPathAttribute>
+                                            <d17p1:XPathAttribute z:Id="i39">
+                                              <d17p1:IsEnabled>false</d17p1:IsEnabled>
+                                              <d17p1:IsPositionAttribute>false</d17p1:IsPositionAttribute>
+                                              <d17p1:Operator>Equal</d17p1:Operator>
+                                              <d17p1:Value>'18988'</d17p1:Value>
+                                              <d17p1:_isCSharpExpression>false</d17p1:_isCSharpExpression>
+                                              <d17p1:_name>ProcessId</d17p1:_name>
+                                            </d17p1:XPathAttribute>
+                                            <d17p1:XPathAttribute z:Id="i40">
+                                              <d17p1:IsEnabled>false</d17p1:IsEnabled>
+                                              <d17p1:IsPositionAttribute>false</d17p1:IsPositionAttribute>
+                                              <d17p1:Operator>Equal</d17p1:Operator>
+                                              <d17p1:Value>'0'</d17p1:Value>
+                                              <d17p1:_isCSharpExpression>false</d17p1:_isCSharpExpression>
+                                              <d17p1:_name>LegacyIAccessiblePattern_ChildId</d17p1:_name>
+                                            </d17p1:XPathAttribute>
+                                            <d17p1:XPathAttribute z:Id="i41">
+                                              <d17p1:IsEnabled>false</d17p1:IsEnabled>
+                                              <d17p1:IsPositionAttribute>false</d17p1:IsPositionAttribute>
+                                              <d17p1:Operator>Equal</d17p1:Operator>
+                                              <d17p1:Value>'test.ps1 — Блокнот'</d17p1:Value>
+                                              <d17p1:_isCSharpExpression>false</d17p1:_isCSharpExpression>
+                                              <d17p1:_name>LegacyIAccessiblePattern_Name</d17p1:_name>
+                                            </d17p1:XPathAttribute>
+                                            <d17p1:XPathAttribute z:Id="i42">
+                                              <d17p1:IsEnabled>false</d17p1:IsEnabled>
+                                              <d17p1:IsPositionAttribute>false</d17p1:IsPositionAttribute>
+                                              <d17p1:Operator>Equal</d17p1:Operator>
+                                              <d17p1:Value>'True'</d17p1:Value>
+                                              <d17p1:_isCSharpExpression>false</d17p1:_isCSharpExpression>
+                                              <d17p1:_name>TransformPattern_CanMove</d17p1:_name>
+                                            </d17p1:XPathAttribute>
+                                            <d17p1:XPathAttribute z:Id="i43">
+                                              <d17p1:IsEnabled>false</d17p1:IsEnabled>
+                                              <d17p1:IsPositionAttribute>false</d17p1:IsPositionAttribute>
+                                              <d17p1:Operator>Equal</d17p1:Operator>
+                                              <d17p1:Value>'False'</d17p1:Value>
+                                              <d17p1:_isCSharpExpression>false</d17p1:_isCSharpExpression>
+                                              <d17p1:_name>TransformPattern_CanResize</d17p1:_name>
+                                            </d17p1:XPathAttribute>
+                                            <d17p1:XPathAttribute z:Id="i44">
+                                              <d17p1:IsEnabled>false</d17p1:IsEnabled>
+                                              <d17p1:IsPositionAttribute>false</d17p1:IsPositionAttribute>
+                                              <d17p1:Operator>Equal</d17p1:Operator>
+                                              <d17p1:Value>'False'</d17p1:Value>
+                                              <d17p1:_isCSharpExpression>false</d17p1:_isCSharpExpression>
+                                              <d17p1:_name>TransformPattern_CanRotate</d17p1:_name>
+                                            </d17p1:XPathAttribute>
+                                            <d17p1:XPathAttribute z:Id="i45">
+                                              <d17p1:IsEnabled>false</d17p1:IsEnabled>
+                                              <d17p1:IsPositionAttribute>false</d17p1:IsPositionAttribute>
+                                              <d17p1:Operator>Equal</d17p1:Operator>
+                                              <d17p1:Value>'False'</d17p1:Value>
+                                              <d17p1:_isCSharpExpression>false</d17p1:_isCSharpExpression>
+                                              <d17p1:_name>WindowPattern_CanMaximize</d17p1:_name>
+                                            </d17p1:XPathAttribute>
+                                            <d17p1:XPathAttribute z:Id="i46">
+                                              <d17p1:IsEnabled>false</d17p1:IsEnabled>
+                                              <d17p1:IsPositionAttribute>false</d17p1:IsPositionAttribute>
+                                              <d17p1:Operator>Equal</d17p1:Operator>
+                                              <d17p1:Value>'True'</d17p1:Value>
+                                              <d17p1:_isCSharpExpression>false</d17p1:_isCSharpExpression>
+                                              <d17p1:_name>WindowPattern_CanMinimize</d17p1:_name>
+                                            </d17p1:XPathAttribute>
+                                            <d17p1:XPathAttribute z:Id="i47">
+                                              <d17p1:IsEnabled>false</d17p1:IsEnabled>
+                                              <d17p1:IsPositionAttribute>false</d17p1:IsPositionAttribute>
+                                              <d17p1:Operator>Equal</d17p1:Operator>
+                                              <d17p1:Value>'False'</d17p1:Value>
+                                              <d17p1:_isCSharpExpression>false</d17p1:_isCSharpExpression>
+                                              <d17p1:_name>WindowPattern_IsModal</d17p1:_name>
+                                            </d17p1:XPathAttribute>
+                                            <d17p1:XPathAttribute z:Id="i48">
+                                              <d17p1:IsEnabled>false</d17p1:IsEnabled>
+                                              <d17p1:IsPositionAttribute>false</d17p1:IsPositionAttribute>
+                                              <d17p1:Operator>Equal</d17p1:Operator>
+                                              <d17p1:Value>'False'</d17p1:Value>
+                                              <d17p1:_isCSharpExpression>false</d17p1:_isCSharpExpression>
+                                              <d17p1:_name>WindowPattern_IsTopmost</d17p1:_name>
+                                            </d17p1:XPathAttribute>
+                                          </d18p1:list>
+                                        </d17p1:Attributes>
+                                        <d17p1:IsEnabled>true</d17p1:IsEnabled>
+                                        <d17p1:Name>Window</d17p1:Name>
+                                      </d17p1:XPathNode>
+                                      <d17p1:XPathNode z:Id="i49">
+                                        <d17p1:AttributeOperators xmlns:d21p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays">
+                                          <d21p1:string>and</d21p1:string>
+                                          <d21p1:string>and</d21p1:string>
+                                          <d21p1:string>and</d21p1:string>
+                                          <d21p1:string>and</d21p1:string>
+                                          <d21p1:string>and</d21p1:string>
+                                          <d21p1:string>and</d21p1:string>
+                                          <d21p1:string>and</d21p1:string>
+                                        </d17p1:AttributeOperators>
+                                        <d17p1:Attributes>
+                                          <d18p1:list>
+                                            <d17p1:XPathAttribute z:Id="i50">
+                                              <d17p1:IsEnabled>false</d17p1:IsEnabled>
+                                              <d17p1:IsPositionAttribute>true</d17p1:IsPositionAttribute>
+                                              <d17p1:Operator>Equal</d17p1:Operator>
+                                              <d17p1:Value>1</d17p1:Value>
+                                              <d17p1:_isCSharpExpression>false</d17p1:_isCSharpExpression>
+                                              <d17p1:_name></d17p1:_name>
+                                            </d17p1:XPathAttribute>
+                                            <d17p1:XPathAttribute z:Id="i51">
+                                              <d17p1:IsEnabled>true</d17p1:IsEnabled>
+                                              <d17p1:IsPositionAttribute>false</d17p1:IsPositionAttribute>
+                                              <d17p1:Operator>Equal</d17p1:Operator>
+                                              <d17p1:Value>'Windows.UI.Input.InputSite.WindowClass'</d17p1:Value>
+                                              <d17p1:_isCSharpExpression>false</d17p1:_isCSharpExpression>
+                                              <d17p1:_name>ClassName</d17p1:_name>
+                                            </d17p1:XPathAttribute>
+                                            <d17p1:XPathAttribute z:Id="i52">
+                                              <d17p1:IsEnabled>false</d17p1:IsEnabled>
+                                              <d17p1:IsPositionAttribute>false</d17p1:IsPositionAttribute>
+                                              <d17p1:Operator>Equal</d17p1:Operator>
+                                              <d17p1:Value>'Pane'</d17p1:Value>
+                                              <d17p1:_isCSharpExpression>false</d17p1:_isCSharpExpression>
+                                              <d17p1:_name>ControlType</d17p1:_name>
+                                            </d17p1:XPathAttribute>
+                                            <d17p1:XPathAttribute z:Id="i53">
+                                              <d17p1:IsEnabled>false</d17p1:IsEnabled>
+                                              <d17p1:IsPositionAttribute>false</d17p1:IsPositionAttribute>
+                                              <d17p1:Operator>Equal</d17p1:Operator>
+                                              <d17p1:Value>'XAML'</d17p1:Value>
+                                              <d17p1:_isCSharpExpression>false</d17p1:_isCSharpExpression>
+                                              <d17p1:_name>FrameworkId</d17p1:_name>
+                                            </d17p1:XPathAttribute>
+                                            <d17p1:XPathAttribute z:Id="i54">
+                                              <d17p1:IsEnabled>false</d17p1:IsEnabled>
+                                              <d17p1:IsPositionAttribute>false</d17p1:IsPositionAttribute>
+                                              <d17p1:Operator>Equal</d17p1:Operator>
+                                              <d17p1:Value>'False'</d17p1:Value>
+                                              <d17p1:_isCSharpExpression>false</d17p1:_isCSharpExpression>
+                                              <d17p1:_name>IsDialog</d17p1:_name>
+                                            </d17p1:XPathAttribute>
+                                            <d17p1:XPathAttribute z:Id="i55">
+                                              <d17p1:IsEnabled>false</d17p1:IsEnabled>
+                                              <d17p1:IsPositionAttribute>false</d17p1:IsPositionAttribute>
+                                              <d17p1:Operator>Equal</d17p1:Operator>
+                                              <d17p1:Value>'True'</d17p1:Value>
+                                              <d17p1:_isCSharpExpression>false</d17p1:_isCSharpExpression>
+                                              <d17p1:_name>IsEnabled</d17p1:_name>
+                                            </d17p1:XPathAttribute>
+                                            <d17p1:XPathAttribute z:Id="i56">
+                                              <d17p1:IsEnabled>false</d17p1:IsEnabled>
+                                              <d17p1:IsPositionAttribute>false</d17p1:IsPositionAttribute>
+                                              <d17p1:Operator>Equal</d17p1:Operator>
+                                              <d17p1:Value>'панель'</d17p1:Value>
+                                              <d17p1:_isCSharpExpression>false</d17p1:_isCSharpExpression>
+                                              <d17p1:_name>LocalizedControlType</d17p1:_name>
+                                            </d17p1:XPathAttribute>
+                                            <d17p1:XPathAttribute z:Id="i57">
+                                              <d17p1:IsEnabled>false</d17p1:IsEnabled>
+                                              <d17p1:IsPositionAttribute>false</d17p1:IsPositionAttribute>
+                                              <d17p1:Operator>Equal</d17p1:Operator>
+                                              <d17p1:Value>'18988'</d17p1:Value>
+                                              <d17p1:_isCSharpExpression>false</d17p1:_isCSharpExpression>
+                                              <d17p1:_name>ProcessId</d17p1:_name>
+                                            </d17p1:XPathAttribute>
+                                            <d17p1:XPathAttribute z:Id="i58">
+                                              <d17p1:IsEnabled>false</d17p1:IsEnabled>
+                                              <d17p1:IsPositionAttribute>false</d17p1:IsPositionAttribute>
+                                              <d17p1:Operator>Equal</d17p1:Operator>
+                                              <d17p1:Value>'0'</d17p1:Value>
+                                              <d17p1:_isCSharpExpression>false</d17p1:_isCSharpExpression>
+                                              <d17p1:_name>LegacyIAccessiblePattern_ChildId</d17p1:_name>
+                                            </d17p1:XPathAttribute>
+                                          </d18p1:list>
+                                        </d17p1:Attributes>
+                                        <d17p1:IsEnabled>true</d17p1:IsEnabled>
+                                        <d17p1:Name>Pane</d17p1:Name>
+                                      </d17p1:XPathNode>
+                                    </d18p1:list>
+                                  </d17p1:Nodes>
+                                  <_screenShotBase64 i:nil="true" />
+                                </_xpathSettings>
+                              </PropertyValue>
+                            </PropertyValues>
+                            <SelectedOptionId>0</SelectedOptionId>
+                            <WidthOnFlowchart>360</WidthOnFlowchart>
+                            <AutoCloseMode>None</AutoCloseMode>
+                            <EnableStatus>true</EnableStatus>
+                            <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+                            <RetryCount>-1</RetryCount>
+                            <Text>Ожидать появления заголовка карточки</Text>
+                            <_activityFullName>Activities.Desktop.WaitWhileUIElement</_activityFullName>
+                          </AbstractStep>
+                        </Childs>
+                        <HeightOnFlowchart i:nil="true" />
+                        <Id>a742c395-2406-4e28-90ea-8de9957c80a7</Id>
+                        <Parent z:Ref="i21" />
+                        <PositionOnFlowchart xmlns:d13p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+                        <PropertyValues />
+                        <SelectedOptionId i:nil="true" />
+                        <WidthOnFlowchart i:nil="true" />
+                        <AutoCloseMode>None</AutoCloseMode>
+                        <EnableStatus>true</EnableStatus>
+                        <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+                        <RetryCount>-1</RetryCount>
+                        <Text></Text>
+                        <_activityFullName>BR.Core.Base.IfTrue</_activityFullName>
+                      </AbstractStep>
+                      <AbstractStep z:Id="i59" i:type="ExecutedStep">
+                        <Childs />
+                        <HeightOnFlowchart i:nil="true" />
+                        <Id>9c88fc31-b8b7-4377-a707-44d27929f705</Id>
+                        <Parent z:Ref="i21" />
+                        <PositionOnFlowchart xmlns:d13p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+                        <PropertyValues />
+                        <SelectedOptionId i:nil="true" />
+                        <WidthOnFlowchart i:nil="true" />
+                        <AutoCloseMode>None</AutoCloseMode>
+                        <EnableStatus>true</EnableStatus>
+                        <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+                        <RetryCount>-1</RetryCount>
+                        <Text></Text>
+                        <_activityFullName>BR.Core.Base.IfFalse</_activityFullName>
+                      </AbstractStep>
+                    </Childs>
+                    <HeightOnFlowchart i:nil="true" />
+                    <Id>c5433c5c-db02-4c8c-a5d8-cc5b966b7947</Id>
+                    <Parent z:Ref="i20" />
+                    <PositionOnFlowchart xmlns:d11p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+                    <PropertyValues>
+                      <PropertyValue z:Id="i60">
+                        <PropertyName>Condition</PropertyName>
+                        <_dataType>Expression</_dataType>
+                        <_expression>(int)transaction_info["transaction_index"] != 0 &amp;&amp; ((int)transaction_info["transaction_index"]+1) % 4 == 0</_expression>
+                        <_screenShotBase64 i:nil="true" />
+                        <_value i:nil="true" />
+                        <_xpathSettings xmlns:d13p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+                      </PropertyValue>
+                    </PropertyValues>
+                    <SelectedOptionId i:nil="true" />
+                    <WidthOnFlowchart i:nil="true" />
+                    <AutoCloseMode>None</AutoCloseMode>
+                    <EnableStatus>true</EnableStatus>
+                    <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+                    <RetryCount>-1</RetryCount>
+                    <Text>Имитация глобальной ошибки для каждой 3-ей транзакции</Text>
+                    <_activityFullName>BR.Core.Base.If</_activityFullName>
+                  </AbstractStep>
+                </Childs>
+                <HeightOnFlowchart i:nil="true" />
+                <Id>40c91a3f-0365-4116-9d7a-24c60dc547d7</Id>
+                <Parent z:Ref="i19" />
+                <PositionOnFlowchart xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+                <PropertyValues />
+                <SelectedOptionId i:nil="true" />
+                <WidthOnFlowchart i:nil="true" />
+                <AutoCloseMode>None</AutoCloseMode>
+                <EnableStatus>true</EnableStatus>
+                <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+                <RetryCount>-1</RetryCount>
+                <Text></Text>
+                <_activityFullName>BR.Core.Base.Try</_activityFullName>
+              </AbstractStep>
+              <AbstractStep z:Id="i61" i:type="ExecutedStep">
+                <Childs>
+                  <AbstractStep z:Id="i62" i:type="CommentStep">
+                    <Childs />
+                    <HeightOnFlowchart>50</HeightOnFlowchart>
+                    <Id>659da6a6-8655-4a73-93f2-e342ae063700</Id>
+                    <Parent z:Ref="i61" />
+                    <PositionOnFlowchart xmlns:d11p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+                    <PropertyValues />
+                    <SelectedOptionId i:nil="true" />
+                    <WidthOnFlowchart>360</WidthOnFlowchart>
+                    <IsCollapsed>false</IsCollapsed>
+                    <Text>При возникновении нештатной ошибки по умолчанию считаем транзакцию `failed` для текущей попытки `retry_counter`
+Если ещё остались попытки, тогда такое падение приведет к перезапуску систем и попытке получить актуальные транзакции повторно
+
+При возникновении любой System.Exception ошибки состояние текущей транзакции:
+-`failed`, если попытка последняя
+-`retrying`, если есть дополнительные попытки</Text>
+                  </AbstractStep>
+                  <AbstractStep z:Id="i63" i:type="ExecutedStep">
+                    <Childs />
+                    <HeightOnFlowchart>50</HeightOnFlowchart>
+                    <Id>04c3f797-80dd-455f-a56d-77734906b342</Id>
+                    <Parent z:Ref="i61" />
+                    <PositionOnFlowchart xmlns:d11p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+                    <PropertyValues>
+                      <PropertyValue z:Id="i64">
+                        <PropertyName>Text</PropertyName>
+                        <_dataType>Expression</_dataType>
+                        <_expression>$@"Ошибка на этапе ""3. ОТКРЫТИЕ КАРТОЧКИ
+   • Двойной клик по целевой строке таблицы
+   • Альтернатива: Выделить + кнопка ""Открыть детали""
+   • Ожидать появления заголовка карточки"": {source_step}"</_expression>
+                        <_screenShotBase64 i:nil="true" />
+                        <_value i:nil="true" />
+                        <_xpathSettings xmlns:d13p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+                      </PropertyValue>
+                    </PropertyValues>
+                    <SelectedOptionId>0</SelectedOptionId>
+                    <WidthOnFlowchart>360</WidthOnFlowchart>
+                    <AutoCloseMode>None</AutoCloseMode>
+                    <EnableStatus>true</EnableStatus>
+                    <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+                    <RetryCount>-1</RetryCount>
+                    <Text>Вызвать исключение System.Exception</Text>
+                    <_activityFullName>BR.Core.Base.ThrowException</_activityFullName>
+                  </AbstractStep>
+                </Childs>
+                <HeightOnFlowchart i:nil="true" />
+                <Id>eca560fa-c977-4c1b-bad5-a1adcfaa6710</Id>
+                <Parent z:Ref="i19" />
+                <PositionOnFlowchart xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+                <PropertyValues>
+                  <PropertyValue z:Id="i65">
+                    <PropertyName>Source</PropertyName>
+                    <_dataType>Expression</_dataType>
+                    <_expression>source_step</_expression>
+                    <_screenShotBase64 i:nil="true" />
+                    <_value i:nil="true" />
+                    <_xpathSettings xmlns:d11p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+                  </PropertyValue>
+                </PropertyValues>
+                <SelectedOptionId i:nil="true" />
+                <WidthOnFlowchart i:nil="true" />
+                <AutoCloseMode>None</AutoCloseMode>
+                <EnableStatus>true</EnableStatus>
+                <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+                <RetryCount>-1</RetryCount>
+                <Text></Text>
+                <_activityFullName>BR.Core.Base.Catch</_activityFullName>
+              </AbstractStep>
+              <AbstractStep z:Id="i66" i:type="ExecutedStep">
+                <Childs />
+                <HeightOnFlowchart i:nil="true" />
+                <Id>1a317cae-0ade-46f9-be34-35374218ceda</Id>
+                <Parent z:Ref="i19" />
+                <PositionOnFlowchart xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+                <PropertyValues />
+                <SelectedOptionId i:nil="true" />
+                <WidthOnFlowchart i:nil="true" />
+                <AutoCloseMode>None</AutoCloseMode>
+                <EnableStatus>true</EnableStatus>
+                <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+                <RetryCount>-1</RetryCount>
+                <Text></Text>
+                <_activityFullName>BR.Core.Base.Finally</_activityFullName>
+              </AbstractStep>
+            </Childs>
+            <HeightOnFlowchart i:nil="true" />
+            <Id>186eecbe-26da-4269-b62d-39888c9552c5</Id>
+            <Parent z:Ref="i14" />
+            <PositionOnFlowchart xmlns:d7p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+            <PropertyValues />
+            <SelectedOptionId i:nil="true" />
+            <WidthOnFlowchart i:nil="true" />
+            <AutoCloseMode>None</AutoCloseMode>
+            <EnableStatus>true</EnableStatus>
+            <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+            <RetryCount>-1</RetryCount>
+            <Text></Text>
+            <_activityFullName>BR.Core.Base.TryCatch</_activityFullName>
+          </AbstractStep>
+        </Childs>
+        <HeightOnFlowchart i:nil="true" />
+        <Id>7dceea4a-5568-4726-8764-1840fd899729</Id>
+        <Parent z:Ref="i2" />
+        <PositionOnFlowchart xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+        <PropertyValues />
+        <SelectedOptionId i:nil="true" />
+        <WidthOnFlowchart i:nil="true" />
+        <AutoCloseMode>None</AutoCloseMode>
+        <EnableStatus>true</EnableStatus>
+        <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+        <RetryCount>-1</RetryCount>
+        <Text>3. Открытие карточки</Text>
+        <_activityFullName>BR.Core.Base.Container</_activityFullName>
+      </AbstractStep>
+    </Childs>
+    <HeightOnFlowchart i:nil="true" />
+    <Id>7faba8ac-3929-4dff-97a1-bffff160867a</Id>
+    <Parent i:nil="true" />
+    <PositionOnFlowchart xmlns:d3p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+    <PropertyValues />
+    <SelectedOptionId i:nil="true" />
+    <WidthOnFlowchart i:nil="true" />
+    <AutoCloseMode>None</AutoCloseMode>
+    <EnableStatus>true</EnableStatus>
+    <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+    <RetryCount>-1</RetryCount>
+    <Text></Text>
+    <_activityFullName>BR.Core.Base.Container</_activityFullName>
+  </Logic>
+  <Name>open_card.pix</Name>
+  <Namespaces xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <Params>
+    <Parameter z:Id="i67">
+      <DefaultValueExpression>new Dictionary&lt;string, object&gt;()</DefaultValueExpression>
+      <Description>Глобальный контекст выполнения приложения. Содержит пути, конфигурации и динамические параметры.</Description>
+      <Name>global_context</Name>
+      <RunnerType>None</RunnerType>
+      <TypeString>System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]</TypeString>
+    </Parameter>
+    <Parameter z:Id="i68">
+      <DefaultValueExpression>new Dictionary&lt;string, object&gt;()</DefaultValueExpression>
+      <Description>Накопительный словарь по текущей транзакции</Description>
+      <Name>transaction_info</Name>
+      <RunnerType>None</RunnerType>
+      <TypeString>System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]</TypeString>
+    </Parameter>
+  </Params>
+  <PlatformVersion xmlns:d2p1="http://schemas.datacontract.org/2004/07/System" xmlns="">
+    <d2p1:_Build>1</d2p1:_Build>
+    <d2p1:_Major>3</d2p1:_Major>
+    <d2p1:_Minor>2</d2p1:_Minor>
+    <d2p1:_Revision>0</d2p1:_Revision>
+  </PlatformVersion>
+  <TemplateVersion xmlns:d2p1="http://schemas.datacontract.org/2004/07/System" i:nil="true" />
+  <Variables xmlns:d2p1="http://schemas.datacontract.org/2004/07/BR.Logic.Params">
+    <d2p1:Variable z:Id="i69">
+      <d2p1:DefaultValueExpression>"open_card.pix"</d2p1:DefaultValueExpression>
+      <d2p1:Description>Наименование текущего скрипта, используется в логировании.</d2p1:Description>
+      <d2p1:Name>script_name</d2p1:Name>
+      <d2p1:TypeString>System.String</d2p1:TypeString>
+    </d2p1:Variable>
+  </Variables>
+  <Version i:nil="true" />
+</Script>

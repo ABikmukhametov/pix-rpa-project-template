@@ -1,0 +1,488 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:i="http://www.w3.org/2001/XMLSchema-instance" z:Id="i1" xmlns:z="http://schemas.microsoft.com/2003/10/Serialization/" xmlns="http://schemas.datacontract.org/2004/07/BR.Logic">
+  <CompilationType>CSharp</CompilationType>
+  <Description>Новый скрипт без наполнения.</Description>
+  <Id>76c1f9b1-e575-4465-8db9-e754524056d7</Id>
+  <Logic z:Id="i2" i:type="ExecutedStep">
+    <Childs>
+      <AbstractStep z:Id="i3" i:type="CommentStep">
+        <Childs />
+        <HeightOnFlowchart>50</HeightOnFlowchart>
+        <Id>6ae25336-b828-4b03-8193-dee7593d4239</Id>
+        <Parent z:Ref="i2" />
+        <PositionOnFlowchart xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+        <PropertyValues />
+        <SelectedOptionId i:nil="true" />
+        <WidthOnFlowchart>360</WidthOnFlowchart>
+        <IsCollapsed>false</IsCollapsed>
+        <Text>### Описание
+Скрипт формирует итоговый отчёт на основе обработанных транзакций: подготавливает человекочитаемую таблицу, преобразует статусы, генерирует HTML-отчёт, устанавливает итоговый статус выполнения и фиксирует время завершения.
+
+| Направление | Аргумент | Тип | Описание |
+| :--- | :--- | :--- | :--- |
+| **InOut** | `global_context` | Dictionary&lt;System.String, System.Object&gt; | Глобальный контекст выполнения приложения. Содержит пути, конфигурации и динамические параметры. |
+
+---</Text>
+      </AbstractStep>
+      <AbstractStep z:Id="i4" i:type="ExecutedStep">
+        <Childs />
+        <HeightOnFlowchart>50</HeightOnFlowchart>
+        <Id>5570f428-8500-4a02-a2b3-81eb0660dbc3</Id>
+        <Parent z:Ref="i2" />
+        <PositionOnFlowchart xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+        <PropertyValues>
+          <PropertyValue z:Id="i5">
+            <PropertyName>Value</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>((DataTable)global_context["transactions"]).Copy()</_expression>
+            <_screenShotBase64 i:nil="true" />
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+          <PropertyValue z:Id="i6">
+            <PropertyName>To</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>custom_transactions</_expression>
+            <_screenShotBase64 i:nil="true" />
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+        </PropertyValues>
+        <SelectedOptionId i:nil="true" />
+        <WidthOnFlowchart>360</WidthOnFlowchart>
+        <AutoCloseMode>None</AutoCloseMode>
+        <EnableStatus>true</EnableStatus>
+        <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+        <RetryCount>-1</RetryCount>
+        <Text>Делаем изменяемую копию текущего отчета</Text>
+        <_activityFullName>BR.Core.Base.Assign</_activityFullName>
+      </AbstractStep>
+      <AbstractStep z:Id="i7" i:type="ExecutedStep">
+        <Childs />
+        <HeightOnFlowchart>50</HeightOnFlowchart>
+        <Id>6c05ba1f-c3b3-498a-998a-01af9c5fe2d0</Id>
+        <Parent z:Ref="i2" />
+        <PositionOnFlowchart xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+        <PropertyValues>
+          <PropertyValue z:Id="i8">
+            <PropertyName>CSCode</PropertyName>
+            <_dataType>Value</_dataType>
+            <_expression i:nil="true" />
+            <_screenShotBase64 i:nil="true" />
+            <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:string">// --- 2.1. Добавление порядкового номера строки "№" ---
+custom_transactions.Columns.Add("№", typeof(string));
+int index = 1;
+foreach (DataRow row in custom_transactions.Rows)
+{
+    row["№"] = index;
+    index++;
+}
+
+// --- 2.2. Преобразование технических статусов к русским формулировкам для отчёта ---
+var status_map = new Dictionary&lt;string, string&gt;
+{
+    { "new", "Новая" },
+    { "processing", "В обработке" },
+    { "retrying", "Повторная попытка" },
+    { "completed", "Завершено" },
+    { "business_failed", "Бизнес-исключение" },
+    { "failed", "Ошибка" },
+    { "canceled", "Отменено" }
+};
+foreach (DataRow row in custom_transactions.Rows)
+{
+    var val = (row["rpa_status"] ?? "").ToString().ToLower();
+    row["rpa_status"] = status_map.ContainsKey(val) ? status_map[val] : "Неизвестно";
+}
+
+// --- 2.3. Удаление технических столбцов, не нужных в итоговой отчётности ---
+List&lt;string&gt; columns_for_delete = new List&lt;string&gt;() { "rpa_created_at", "rpa_updated_at", "rpa_retries" };
+foreach (string colName in columns_for_delete)
+{
+    if (custom_transactions.Columns.Contains(colName))
+    {
+        custom_transactions.Columns.Remove(colName);
+    }
+}
+
+// --- 2.4. Переименование столбцов для человекочитаемой формы ---
+Dictionary&lt;string, string&gt; columns_for_rename = new Dictionary&lt;string, string&gt;() {
+    { "rpa_status", "Статус" },
+    { "rpa_comment", "Комментарий" },
+    { "rpa_duration_sec", "Длительность, сек" },
+    { "id", "Идентификатор" },
+    { "rpa_screenshot", "Скриншот" }
+};
+foreach (var kv in columns_for_rename)
+{
+    if (custom_transactions.Columns.Contains(kv.Key))
+    {
+        custom_transactions.Columns[kv.Key].ColumnName = kv.Value;
+    }
+}
+
+// --- 2.5. Упорядочивание столбцов согласно согласованному шаблону ---
+Dictionary&lt;string, int&gt; columns_ordinals = new Dictionary&lt;string, int&gt;() {
+    { "№", 0 },
+    { "Статус", 1 },
+    { "Комментарий", 2 },
+    { "Длительность, сек", 3 },
+    { "Номер дела", 4 }
+};
+List&lt;DataColumn&gt; ordered_columns = new List&lt;DataColumn&gt;();
+List&lt;DataColumn&gt; remaining_columns = custom_transactions.Columns.Cast&lt;DataColumn&gt;().ToList();
+
+// Добавляем столбцы в явно заданном шаблонном порядке
+foreach (var kv in columns_ordinals.OrderBy(x =&gt; x.Value))
+{
+    DataColumn col = remaining_columns.FirstOrDefault(c =&gt; c.ColumnName == kv.Key);
+    if (col != null)
+    {
+        ordered_columns.Add(col);
+        remaining_columns.Remove(col);
+    }
+}
+// Затем все оставшиеся (дополнительные) столбцы — в конец таблицы
+ordered_columns.AddRange(remaining_columns);
+
+// Применяем новый порядок столбцов
+for (int i = 0; i &lt; ordered_columns.Count; i++)
+{
+    ordered_columns[i].SetOrdinal(i);
+}</_value>
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+        </PropertyValues>
+        <SelectedOptionId i:nil="true" />
+        <WidthOnFlowchart>360</WidthOnFlowchart>
+        <AutoCloseMode>None</AutoCloseMode>
+        <EnableStatus>true</EnableStatus>
+        <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+        <RetryCount>-1</RetryCount>
+        <Text>Пример кастомизации отчета</Text>
+        <_activityFullName>BR.Core.Base.ExecuteCSCode</_activityFullName>
+      </AbstractStep>
+      <AbstractStep z:Id="i9" i:type="ExecutedStep">
+        <Childs />
+        <HeightOnFlowchart>50</HeightOnFlowchart>
+        <Id>94769332-11b1-41fc-8593-a80407a3c8f2</Id>
+        <Parent z:Ref="i2" />
+        <PositionOnFlowchart xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+        <PropertyValues>
+          <PropertyValue z:Id="i10">
+            <PropertyName>InputTable</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>custom_transactions</_expression>
+            <_screenShotBase64 i:nil="true" />
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+          <PropertyValue z:Id="i11">
+            <PropertyName>FormattedResult</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression></_expression>
+            <_screenShotBase64 i:nil="true" />
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+          <PropertyValue z:Id="i12">
+            <PropertyName>HtmlTableCaption</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>"TRANSACTIONS"</_expression>
+            <_screenShotBase64 i:nil="true" />
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+          <PropertyValue z:Id="i13">
+            <PropertyName>FormattedHTMLResult</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>custom_transactions_html</_expression>
+            <_screenShotBase64 i:nil="true" />
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+          <PropertyValue z:Id="i14">
+            <PropertyName>HtmlHeaderStyle</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>"background: #4169E1; color: #FFFFFF;"</_expression>
+            <_screenShotBase64 i:nil="true" />
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+        </PropertyValues>
+        <SelectedOptionId>1</SelectedOptionId>
+        <WidthOnFlowchart>360</WidthOnFlowchart>
+        <AutoCloseMode>None</AutoCloseMode>
+        <EnableStatus>true</EnableStatus>
+        <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+        <RetryCount>-1</RetryCount>
+        <Text></Text>
+        <_activityFullName>Activities.StringCommunity.ConvertTableToString</_activityFullName>
+      </AbstractStep>
+      <AbstractStep z:Id="i15" i:type="ExecutedStep">
+        <Childs />
+        <HeightOnFlowchart>50</HeightOnFlowchart>
+        <Id>140e5962-1e6c-4d55-87ee-a3e4038091af</Id>
+        <Parent z:Ref="i2" />
+        <PositionOnFlowchart xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+        <PropertyValues>
+          <PropertyValue z:Id="i16">
+            <PropertyName>Key</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>"custom_content"</_expression>
+            <_screenShotBase64 i:nil="true" />
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+          <PropertyValue z:Id="i17">
+            <PropertyName>Value</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>custom_transactions_html</_expression>
+            <_screenShotBase64 i:nil="true" />
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+          <PropertyValue z:Id="i18">
+            <PropertyName>Dictionary</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>global_context</_expression>
+            <_screenShotBase64 i:nil="true" />
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+        </PropertyValues>
+        <SelectedOptionId i:nil="true" />
+        <WidthOnFlowchart>360</WidthOnFlowchart>
+        <AutoCloseMode>None</AutoCloseMode>
+        <EnableStatus>true</EnableStatus>
+        <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+        <RetryCount>-1</RetryCount>
+        <Text>Встраиваем транзакционную таблицу в кастомный-контент</Text>
+        <_activityFullName>Activities.BaseCollections.Dictionary.AddKey</_activityFullName>
+      </AbstractStep>
+      <AbstractStep z:Id="i19" i:type="ExecutedStep">
+        <Childs>
+          <AbstractStep z:Id="i20" i:type="ExecutedStep">
+            <Childs>
+              <AbstractStep z:Id="i21" i:type="ExecutedStep">
+                <Childs />
+                <HeightOnFlowchart>50</HeightOnFlowchart>
+                <Id>3dc2d86c-cbc5-45c0-94da-2b03a051f1a0</Id>
+                <Parent z:Ref="i20" />
+                <PositionOnFlowchart xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+                <PropertyValues>
+                  <PropertyValue z:Id="i22">
+                    <PropertyName>Key</PropertyName>
+                    <_dataType>Expression</_dataType>
+                    <_expression>"robot_status"</_expression>
+                    <_screenShotBase64 i:nil="true" />
+                    <_value i:nil="true" />
+                    <_xpathSettings xmlns:d11p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+                  </PropertyValue>
+                  <PropertyValue z:Id="i23">
+                    <PropertyName>Value</PropertyName>
+                    <_dataType>Expression</_dataType>
+                    <_expression>"Завершено: техническое окно"</_expression>
+                    <_screenShotBase64 i:nil="true" />
+                    <_value i:nil="true" />
+                    <_xpathSettings xmlns:d11p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+                  </PropertyValue>
+                  <PropertyValue z:Id="i24">
+                    <PropertyName>Dictionary</PropertyName>
+                    <_dataType>Expression</_dataType>
+                    <_expression>global_context</_expression>
+                    <_screenShotBase64 i:nil="true" />
+                    <_value i:nil="true" />
+                    <_xpathSettings xmlns:d11p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+                  </PropertyValue>
+                </PropertyValues>
+                <SelectedOptionId i:nil="true" />
+                <WidthOnFlowchart>360</WidthOnFlowchart>
+                <AutoCloseMode>None</AutoCloseMode>
+                <EnableStatus>true</EnableStatus>
+                <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+                <RetryCount>-1</RetryCount>
+                <Text>Фиксируем итоговый статус для отчетности</Text>
+                <_activityFullName>Activities.BaseCollections.Dictionary.AddKey</_activityFullName>
+              </AbstractStep>
+            </Childs>
+            <HeightOnFlowchart i:nil="true" />
+            <Id>9e0679fc-d57b-4864-a260-ad3b02309b93</Id>
+            <Parent z:Ref="i19" />
+            <PositionOnFlowchart xmlns:d7p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+            <PropertyValues />
+            <SelectedOptionId i:nil="true" />
+            <WidthOnFlowchart i:nil="true" />
+            <AutoCloseMode>None</AutoCloseMode>
+            <EnableStatus>true</EnableStatus>
+            <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+            <RetryCount>-1</RetryCount>
+            <Text></Text>
+            <_activityFullName>BR.Core.Base.IfTrue</_activityFullName>
+          </AbstractStep>
+          <AbstractStep z:Id="i25" i:type="ExecutedStep">
+            <Childs>
+              <AbstractStep z:Id="i26" i:type="ExecutedStep">
+                <Childs />
+                <HeightOnFlowchart>50</HeightOnFlowchart>
+                <Id>2c8fc8c1-4103-4b99-b1e3-c0fb4c3660b4</Id>
+                <Parent z:Ref="i25" />
+                <PositionOnFlowchart xmlns:d9p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+                <PropertyValues>
+                  <PropertyValue z:Id="i27">
+                    <PropertyName>Key</PropertyName>
+                    <_dataType>Expression</_dataType>
+                    <_expression>"robot_status"</_expression>
+                    <_screenShotBase64 i:nil="true" />
+                    <_value i:nil="true" />
+                    <_xpathSettings xmlns:d11p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+                  </PropertyValue>
+                  <PropertyValue z:Id="i28">
+                    <PropertyName>Value</PropertyName>
+                    <_dataType>Expression</_dataType>
+                    <_expression>"Успешно"</_expression>
+                    <_screenShotBase64 i:nil="true" />
+                    <_value i:nil="true" />
+                    <_xpathSettings xmlns:d11p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+                  </PropertyValue>
+                  <PropertyValue z:Id="i29">
+                    <PropertyName>Dictionary</PropertyName>
+                    <_dataType>Expression</_dataType>
+                    <_expression>global_context</_expression>
+                    <_screenShotBase64 i:nil="true" />
+                    <_value i:nil="true" />
+                    <_xpathSettings xmlns:d11p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+                  </PropertyValue>
+                </PropertyValues>
+                <SelectedOptionId i:nil="true" />
+                <WidthOnFlowchart>360</WidthOnFlowchart>
+                <AutoCloseMode>None</AutoCloseMode>
+                <EnableStatus>true</EnableStatus>
+                <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+                <RetryCount>-1</RetryCount>
+                <Text>Фиксируем итоговый статус для отчетности</Text>
+                <_activityFullName>Activities.BaseCollections.Dictionary.AddKey</_activityFullName>
+              </AbstractStep>
+            </Childs>
+            <HeightOnFlowchart i:nil="true" />
+            <Id>e98feb48-f976-4918-a023-cfd9d44deea1</Id>
+            <Parent z:Ref="i19" />
+            <PositionOnFlowchart xmlns:d7p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+            <PropertyValues />
+            <SelectedOptionId i:nil="true" />
+            <WidthOnFlowchart i:nil="true" />
+            <AutoCloseMode>None</AutoCloseMode>
+            <EnableStatus>true</EnableStatus>
+            <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+            <RetryCount>-1</RetryCount>
+            <Text></Text>
+            <_activityFullName>BR.Core.Base.IfFalse</_activityFullName>
+          </AbstractStep>
+        </Childs>
+        <HeightOnFlowchart i:nil="true" />
+        <Id>794b6aae-ca35-436e-bbe8-892668159b36</Id>
+        <Parent z:Ref="i2" />
+        <PositionOnFlowchart xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+        <PropertyValues>
+          <PropertyValue z:Id="i30">
+            <PropertyName>Condition</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>(bool)global_context["maintenance_active"]</_expression>
+            <_screenShotBase64 i:nil="true" />
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+        </PropertyValues>
+        <SelectedOptionId i:nil="true" />
+        <WidthOnFlowchart i:nil="true" />
+        <AutoCloseMode>None</AutoCloseMode>
+        <EnableStatus>true</EnableStatus>
+        <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+        <RetryCount>-1</RetryCount>
+        <Text></Text>
+        <_activityFullName>BR.Core.Base.If</_activityFullName>
+      </AbstractStep>
+      <AbstractStep z:Id="i31" i:type="ExecutedStep">
+        <Childs />
+        <HeightOnFlowchart>50</HeightOnFlowchart>
+        <Id>e1a2fcc5-3cef-49d5-89f1-484c40dd6111</Id>
+        <Parent z:Ref="i2" />
+        <PositionOnFlowchart xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+        <PropertyValues>
+          <PropertyValue z:Id="i32">
+            <PropertyName>Key</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>"end_time"</_expression>
+            <_screenShotBase64 i:nil="true" />
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+          <PropertyValue z:Id="i33">
+            <PropertyName>Value</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>DateTime.Now</_expression>
+            <_screenShotBase64 i:nil="true" />
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+          <PropertyValue z:Id="i34">
+            <PropertyName>Dictionary</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>global_context</_expression>
+            <_screenShotBase64 i:nil="true" />
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+        </PropertyValues>
+        <SelectedOptionId i:nil="true" />
+        <WidthOnFlowchart>360</WidthOnFlowchart>
+        <AutoCloseMode>None</AutoCloseMode>
+        <EnableStatus>true</EnableStatus>
+        <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+        <RetryCount>-1</RetryCount>
+        <Text>Фиксируем время завершения для отчетности</Text>
+        <_activityFullName>Activities.BaseCollections.Dictionary.AddKey</_activityFullName>
+      </AbstractStep>
+    </Childs>
+    <HeightOnFlowchart i:nil="true" />
+    <Id>a0080c38-d169-48d0-bbe6-ff8443eb8ecd</Id>
+    <Parent i:nil="true" />
+    <PositionOnFlowchart xmlns:d3p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+    <PropertyValues />
+    <SelectedOptionId i:nil="true" />
+    <WidthOnFlowchart i:nil="true" />
+    <AutoCloseMode>None</AutoCloseMode>
+    <EnableStatus>true</EnableStatus>
+    <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+    <RetryCount>-1</RetryCount>
+    <Text></Text>
+    <_activityFullName>BR.Core.Base.Container</_activityFullName>
+  </Logic>
+  <Name>core_report_formatter.pix</Name>
+  <Namespaces xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <Params>
+    <Parameter z:Id="i35">
+      <DefaultValueExpression>new Dictionary&lt;string, object&gt;()</DefaultValueExpression>
+      <Description>Глобальный контекст выполнения приложения. Содержит пути, конфигурации и динамические параметры.</Description>
+      <Name>global_context</Name>
+      <RunnerType>None</RunnerType>
+      <TypeString>System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]</TypeString>
+    </Parameter>
+  </Params>
+  <PlatformVersion xmlns:d2p1="http://schemas.datacontract.org/2004/07/System" xmlns="">
+    <d2p1:_Build>1</d2p1:_Build>
+    <d2p1:_Major>3</d2p1:_Major>
+    <d2p1:_Minor>2</d2p1:_Minor>
+    <d2p1:_Revision>0</d2p1:_Revision>
+  </PlatformVersion>
+  <TemplateVersion xmlns:d2p1="http://schemas.datacontract.org/2004/07/System" i:nil="true" />
+  <Variables xmlns:d2p1="http://schemas.datacontract.org/2004/07/BR.Logic.Params">
+    <d2p1:Variable z:Id="i36">
+      <d2p1:DefaultValueExpression>"core_report_formatter.pix"</d2p1:DefaultValueExpression>
+      <d2p1:Description>Наименование текущего скрипта, используется в логировании.</d2p1:Description>
+      <d2p1:Name>script_name</d2p1:Name>
+      <d2p1:TypeString>System.String</d2p1:TypeString>
+    </d2p1:Variable>
+  </Variables>
+  <Version i:nil="true" />
+</Script>

@@ -1,0 +1,440 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Script xmlns:i="http://www.w3.org/2001/XMLSchema-instance" z:Id="i1" xmlns:z="http://schemas.microsoft.com/2003/10/Serialization/" xmlns="http://schemas.datacontract.org/2004/07/BR.Logic">
+  <CompilationType>CSharp</CompilationType>
+  <Description>Новый скрипт без наполнения.</Description>
+  <Id>b715c01f-f8f0-460e-8fcc-e09620a35e80</Id>
+  <Logic z:Id="i2" i:type="ExecutedStep">
+    <Childs>
+      <AbstractStep z:Id="i3" i:type="CommentStep">
+        <Childs />
+        <HeightOnFlowchart>50</HeightOnFlowchart>
+        <Id>a3823a24-5bec-49b4-b420-59a81cebe03b</Id>
+        <Parent z:Ref="i2" />
+        <PositionOnFlowchart xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+        <PropertyValues />
+        <SelectedOptionId i:nil="true" />
+        <WidthOnFlowchart>360</WidthOnFlowchart>
+        <IsCollapsed>false</IsCollapsed>
+        <Text>### Описание
+Скрипт обрабатывает ошибки при работе с транзакциями: логирует детали исключений, ведёт историю ошибок, отслеживает лимиты попыток, сохраняет скриншоты и пути к ним в глобальном контексте для последующей обработки и отчётности.
+
+| Направление | Аргумент | Тип | Описание |
+| :--- | :--- | :--- | :--- |
+| **InOut** | `global_context` | Dictionary&lt;System.String, System.Object&gt; | Глобальный контекст выполнения приложения. Содержит пути, конфигурации и динамические параметры. |
+| **In** | `transaction_handling_error` | System.Exception | Объект ошибки при транзакционной обработке. |
+| **In** | `transactions_error_source` | System.String | Источник ошибки при транзакционной обработке. |
+| **In** | `retry_counter` | System.Int32 | Счётчик текущих попыток. |
+| **In** | `max_serial_errors` | System.Int32 | Максимальное число подряд идущих ошибок перед прерыванием процесса робота. |
+| **In** | `errors_history` | List&lt;System.String&gt; | Список накопленных ошибок при обработке (N подряд). |
+| **In** | `transactions_error_message` | System.String | Сообщение об ошибке при транзакционной обработке. |
+| **In** | `screenshot_retry_counter_file` | System.String | Скриншот ошибки по текущей попытке. |
+
+
+---</Text>
+      </AbstractStep>
+      <AbstractStep z:Id="i4" i:type="ExecutedStep">
+        <Childs />
+        <HeightOnFlowchart>50</HeightOnFlowchart>
+        <Id>fa243c72-0439-427e-8256-3efd612445a6</Id>
+        <Parent z:Ref="i2" />
+        <PositionOnFlowchart xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+        <PropertyValues>
+          <PropertyValue z:Id="i5">
+            <PropertyName>FilePath</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>Path.Combine((string)global_context["framework_root"], "src", "core", "system", "write_log.pix")</_expression>
+            <_screenShotBase64 i:nil="true" />
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+          <PropertyValue z:Id="i6">
+            <PropertyName>Parameters</PropertyName>
+            <_dataType>Value</_dataType>
+            <_expression i:nil="true" />
+            <_screenShotBase64 i:nil="true" />
+            <_value xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.Core" i:type="d7p1:ArrayOfArgumentItem">
+              <d7p1:ArgumentItem z:Id="i7">
+                <d7p1:ArgumentName>global_context</d7p1:ArgumentName>
+                <d7p1:Description i:nil="true" />
+                <d7p1:Expression>global_context</d7p1:Expression>
+                <d7p1:IsRequired>false</d7p1:IsRequired>
+                <d7p1:Type>Dictionary&lt;System.String, System.Object&gt;</d7p1:Type>
+              </d7p1:ArgumentItem>
+              <d7p1:ArgumentItem z:Id="i8">
+                <d7p1:ArgumentName>message</d7p1:ArgumentName>
+                <d7p1:Description i:nil="true" />
+                <d7p1:Expression>$"[{script_name}] `retry_counter`={retry_counter}. Текст ошибки: \"{transaction_handling_error.Message}\". Источник ошибки: \"{transactions_error_source}\""</d7p1:Expression>
+                <d7p1:IsRequired>false</d7p1:IsRequired>
+                <d7p1:Type>System.String</d7p1:Type>
+              </d7p1:ArgumentItem>
+              <d7p1:ArgumentItem z:Id="i9">
+                <d7p1:ArgumentName>log_level</d7p1:ArgumentName>
+                <d7p1:Description i:nil="true" />
+                <d7p1:Expression>"error"</d7p1:Expression>
+                <d7p1:IsRequired>false</d7p1:IsRequired>
+                <d7p1:Type>System.String</d7p1:Type>
+              </d7p1:ArgumentItem>
+            </_value>
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+        </PropertyValues>
+        <SelectedOptionId i:nil="true" />
+        <WidthOnFlowchart>360</WidthOnFlowchart>
+        <AutoCloseMode>None</AutoCloseMode>
+        <EnableStatus>true</EnableStatus>
+        <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+        <RetryCount>-1</RetryCount>
+        <Text>$"[{script_name}] `retry_counter`={retry_counter}. Текст ошибки: \"{transaction_handling_error.Message}\". Источник ошибки: \"{transactions_error_source}\""</Text>
+        <_activityFullName>BR.Core.Base.ExecuteScript</_activityFullName>
+      </AbstractStep>
+      <AbstractStep z:Id="i10" i:type="ExecutedStep">
+        <Childs />
+        <HeightOnFlowchart>50</HeightOnFlowchart>
+        <Id>b7e57b0e-cadd-48cc-9455-e6e0a1ad908d</Id>
+        <Parent z:Ref="i2" />
+        <PositionOnFlowchart xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+        <PropertyValues>
+          <PropertyValue z:Id="i11">
+            <PropertyName>FilePath</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>Path.Combine((string)global_context["framework_root"], "src", "core", "system", "write_log.pix")</_expression>
+            <_screenShotBase64 i:nil="true" />
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+          <PropertyValue z:Id="i12">
+            <PropertyName>Parameters</PropertyName>
+            <_dataType>Value</_dataType>
+            <_expression i:nil="true" />
+            <_screenShotBase64 i:nil="true" />
+            <_value xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.Core" i:type="d7p1:ArrayOfArgumentItem">
+              <d7p1:ArgumentItem z:Id="i13">
+                <d7p1:ArgumentName>global_context</d7p1:ArgumentName>
+                <d7p1:Description i:nil="true" />
+                <d7p1:Expression>global_context</d7p1:Expression>
+                <d7p1:IsRequired>false</d7p1:IsRequired>
+                <d7p1:Type>Dictionary&lt;System.String, System.Object&gt;</d7p1:Type>
+              </d7p1:ArgumentItem>
+              <d7p1:ArgumentItem z:Id="i14">
+                <d7p1:ArgumentName>message</d7p1:ArgumentName>
+                <d7p1:Description i:nil="true" />
+                <d7p1:Expression>$"[{script_name}] {(retry_counter == max_serial_errors 
+    ? $"Достигнут лимит ошибок `{retry_counter} из {max_serial_errors}`"
+    : $"Лимит ошибок не достигнут `{retry_counter} из {max_serial_errors}`")}"</d7p1:Expression>
+                <d7p1:IsRequired>false</d7p1:IsRequired>
+                <d7p1:Type>System.String</d7p1:Type>
+              </d7p1:ArgumentItem>
+              <d7p1:ArgumentItem z:Id="i15">
+                <d7p1:ArgumentName>log_level</d7p1:ArgumentName>
+                <d7p1:Description i:nil="true" />
+                <d7p1:Expression>"error"</d7p1:Expression>
+                <d7p1:IsRequired>false</d7p1:IsRequired>
+                <d7p1:Type>System.String</d7p1:Type>
+              </d7p1:ArgumentItem>
+            </_value>
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+        </PropertyValues>
+        <SelectedOptionId i:nil="true" />
+        <WidthOnFlowchart>360</WidthOnFlowchart>
+        <AutoCloseMode>None</AutoCloseMode>
+        <EnableStatus>true</EnableStatus>
+        <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+        <RetryCount>-1</RetryCount>
+        <Text>$"[{script_name}] {(retry_counter == max_serial_errors 
+    ? $"Достигнут лимит ошибок `{retry_counter} из {max_serial_errors}`"
+    : $"Лимит ошибок не достигнут `{retry_counter} из {max_serial_errors}`")}"</Text>
+        <_activityFullName>BR.Core.Base.ExecuteScript</_activityFullName>
+      </AbstractStep>
+      <AbstractStep z:Id="i16" i:type="ExecutedStep">
+        <Childs />
+        <HeightOnFlowchart>50</HeightOnFlowchart>
+        <Id>4fe2164c-1dcb-4363-98f0-ef173ca25a73</Id>
+        <Parent z:Ref="i2" />
+        <PositionOnFlowchart xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+        <PropertyValues>
+          <PropertyValue z:Id="i17">
+            <PropertyName>Value</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>(string)global_context["errors_dir"] + @$"\retry_{retry_counter}_{Guid.NewGuid().ToString()}.png"</_expression>
+            <_screenShotBase64 i:nil="true" />
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+          <PropertyValue z:Id="i18">
+            <PropertyName>To</PropertyName>
+            <_dataType>Expression</_dataType>
+            <_expression>screenshot_retry_counter_file</_expression>
+            <_screenShotBase64 i:nil="true" />
+            <_value i:nil="true" />
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+        </PropertyValues>
+        <SelectedOptionId i:nil="true" />
+        <WidthOnFlowchart>360</WidthOnFlowchart>
+        <AutoCloseMode>None</AutoCloseMode>
+        <EnableStatus>true</EnableStatus>
+        <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+        <RetryCount>-1</RetryCount>
+        <Text>[2.1.5] — 05-01-2026
+Сгенерировать путь для хранения скриншота об ошибке по текущей попытке</Text>
+        <_activityFullName>BR.Core.Base.Assign</_activityFullName>
+      </AbstractStep>
+      <AbstractStep z:Id="i19" i:type="ExecutedStep">
+        <Childs />
+        <HeightOnFlowchart>50</HeightOnFlowchart>
+        <Id>14097c6e-9c9e-494b-a5f0-a530b677cb4a</Id>
+        <Parent z:Ref="i2" />
+        <PositionOnFlowchart xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+        <PropertyValues>
+          <PropertyValue z:Id="i20">
+            <PropertyName>CSCode</PropertyName>
+            <_dataType>Value</_dataType>
+            <_expression i:nil="true" />
+            <_screenShotBase64 i:nil="true" />
+            <_value xmlns:d7p1="http://www.w3.org/2001/XMLSchema" i:type="d7p1:string">errors_history.Add(transactions_error_message);</_value>
+            <_xpathSettings xmlns:d7p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+          </PropertyValue>
+        </PropertyValues>
+        <SelectedOptionId i:nil="true" />
+        <WidthOnFlowchart>360</WidthOnFlowchart>
+        <AutoCloseMode>None</AutoCloseMode>
+        <EnableStatus>true</EnableStatus>
+        <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+        <RetryCount>-1</RetryCount>
+        <Text>[2.1.3] — 15-11-2025
+Сохраняем ошибку в список</Text>
+        <_activityFullName>BR.Core.Base.ExecuteCSCode</_activityFullName>
+      </AbstractStep>
+      <AbstractStep z:Id="i21" i:type="ExecutedStep">
+        <Childs>
+          <AbstractStep z:Id="i22" i:type="ExecutedStep">
+            <Childs />
+            <HeightOnFlowchart>50</HeightOnFlowchart>
+            <Id>65b389c6-b806-455e-ad58-529df4db798d</Id>
+            <Parent z:Ref="i21" />
+            <PositionOnFlowchart xmlns:d7p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+            <PropertyValues>
+              <PropertyValue z:Id="i23">
+                <PropertyName>Key</PropertyName>
+                <_dataType>Expression</_dataType>
+                <_expression>$"screenshot_retry_counter_{retry_counter}_file"</_expression>
+                <_screenShotBase64 i:nil="true" />
+                <_value i:nil="true" />
+                <_xpathSettings xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+              </PropertyValue>
+              <PropertyValue z:Id="i24">
+                <PropertyName>Value</PropertyName>
+                <_dataType>Expression</_dataType>
+                <_expression>screenshot_retry_counter_file</_expression>
+                <_screenShotBase64 i:nil="true" />
+                <_value i:nil="true" />
+                <_xpathSettings xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+              </PropertyValue>
+              <PropertyValue z:Id="i25">
+                <PropertyName>Dictionary</PropertyName>
+                <_dataType>Expression</_dataType>
+                <_expression>global_context</_expression>
+                <_screenShotBase64 i:nil="true" />
+                <_value i:nil="true" />
+                <_xpathSettings xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+              </PropertyValue>
+            </PropertyValues>
+            <SelectedOptionId i:nil="true" />
+            <WidthOnFlowchart>360</WidthOnFlowchart>
+            <AutoCloseMode>None</AutoCloseMode>
+            <EnableStatus>true</EnableStatus>
+            <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+            <RetryCount>-1</RetryCount>
+            <Text></Text>
+            <_activityFullName>Activities.BaseCollections.Dictionary.AddKey</_activityFullName>
+          </AbstractStep>
+          <AbstractStep z:Id="i26" i:type="ExecutedStep">
+            <Childs />
+            <HeightOnFlowchart>50</HeightOnFlowchart>
+            <Id>5a239ae4-de8d-4bea-bcc3-dcc9886ddaaf</Id>
+            <Parent z:Ref="i21" />
+            <PositionOnFlowchart xmlns:d7p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+            <PropertyValues>
+              <PropertyValue z:Id="i27">
+                <PropertyName>ImagePath</PropertyName>
+                <_dataType>Expression</_dataType>
+                <_expression>screenshot_retry_counter_file</_expression>
+                <_screenShotBase64 i:nil="true" />
+                <_value i:nil="true" />
+                <_xpathSettings xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+              </PropertyValue>
+            </PropertyValues>
+            <SelectedOptionId i:nil="true" />
+            <WidthOnFlowchart>360</WidthOnFlowchart>
+            <AutoCloseMode>None</AutoCloseMode>
+            <EnableStatus>true</EnableStatus>
+            <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+            <RetryCount>-1</RetryCount>
+            <Text>Скриншот транзакционной ошибки</Text>
+            <_activityFullName>Activities.Desktop.DoScreenshot</_activityFullName>
+          </AbstractStep>
+          <AbstractStep z:Id="i28" i:type="ExecutedStep">
+            <Childs />
+            <HeightOnFlowchart>50</HeightOnFlowchart>
+            <Id>51aa904f-de3e-414c-b6dd-d8027daa2e77</Id>
+            <Parent z:Ref="i21" />
+            <PositionOnFlowchart xmlns:d7p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+            <PropertyValues>
+              <PropertyValue z:Id="i29">
+                <PropertyName>FilePath</PropertyName>
+                <_dataType>Expression</_dataType>
+                <_expression>Path.Combine((string)global_context["framework_root"], "src", "core", "system", "write_log.pix")</_expression>
+                <_screenShotBase64 i:nil="true" />
+                <_value i:nil="true" />
+                <_xpathSettings xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+              </PropertyValue>
+              <PropertyValue z:Id="i30">
+                <PropertyName>Parameters</PropertyName>
+                <_dataType>Value</_dataType>
+                <_expression i:nil="true" />
+                <_screenShotBase64 i:nil="true" />
+                <_value xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.Core" i:type="d9p1:ArrayOfArgumentItem">
+                  <d9p1:ArgumentItem z:Id="i31">
+                    <d9p1:ArgumentName>global_context</d9p1:ArgumentName>
+                    <d9p1:Description i:nil="true" />
+                    <d9p1:Expression>global_context</d9p1:Expression>
+                    <d9p1:IsRequired>false</d9p1:IsRequired>
+                    <d9p1:Type>Dictionary&lt;System.String, System.Object&gt;</d9p1:Type>
+                  </d9p1:ArgumentItem>
+                  <d9p1:ArgumentItem z:Id="i32">
+                    <d9p1:ArgumentName>message</d9p1:ArgumentName>
+                    <d9p1:Description i:nil="true" />
+                    <d9p1:Expression>$"[{script_name}] Путь до скриншота ошибки по текущей попытке: \"{screenshot_retry_counter_file}\""</d9p1:Expression>
+                    <d9p1:IsRequired>false</d9p1:IsRequired>
+                    <d9p1:Type>System.String</d9p1:Type>
+                  </d9p1:ArgumentItem>
+                  <d9p1:ArgumentItem z:Id="i33">
+                    <d9p1:ArgumentName>log_level</d9p1:ArgumentName>
+                    <d9p1:Description i:nil="true" />
+                    <d9p1:Expression>"info"</d9p1:Expression>
+                    <d9p1:IsRequired>false</d9p1:IsRequired>
+                    <d9p1:Type>System.String</d9p1:Type>
+                  </d9p1:ArgumentItem>
+                </_value>
+                <_xpathSettings xmlns:d9p1="http://schemas.datacontract.org/2004/07/BR.XPath" i:nil="true" />
+              </PropertyValue>
+            </PropertyValues>
+            <SelectedOptionId i:nil="true" />
+            <WidthOnFlowchart>360</WidthOnFlowchart>
+            <AutoCloseMode>None</AutoCloseMode>
+            <EnableStatus>true</EnableStatus>
+            <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+            <RetryCount>-1</RetryCount>
+            <Text>$"[{script_name}] Путь до скриншота ошибки по текущей попытке: \"{screenshot_retry_counter_file}\""</Text>
+            <_activityFullName>BR.Core.Base.ExecuteScript</_activityFullName>
+          </AbstractStep>
+        </Childs>
+        <HeightOnFlowchart i:nil="true" />
+        <Id>83d15c4c-1eff-4511-8d7d-0a21ff39c37c</Id>
+        <Parent z:Ref="i2" />
+        <PositionOnFlowchart xmlns:d5p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+        <PropertyValues />
+        <SelectedOptionId i:nil="true" />
+        <WidthOnFlowchart i:nil="true" />
+        <AutoCloseMode>None</AutoCloseMode>
+        <EnableStatus>true</EnableStatus>
+        <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+        <RetryCount>-1</RetryCount>
+        <Text>[CATCH] 
+[2.1.1] - 03-10-2025
+Скриншот экрана при ошибке на текущей попытке `retry_counter`</Text>
+        <_activityFullName>BR.Core.Base.Container</_activityFullName>
+      </AbstractStep>
+    </Childs>
+    <HeightOnFlowchart i:nil="true" />
+    <Id>da6d7d3f-ba3a-4362-8923-dd7c09aa2d63</Id>
+    <Parent i:nil="true" />
+    <PositionOnFlowchart xmlns:d3p1="http://schemas.datacontract.org/2004/07/System.Numerics" i:nil="true" />
+    <PropertyValues />
+    <SelectedOptionId i:nil="true" />
+    <WidthOnFlowchart i:nil="true" />
+    <AutoCloseMode>None</AutoCloseMode>
+    <EnableStatus>true</EnableStatus>
+    <ExceptionHandlingMode>Default</ExceptionHandlingMode>
+    <RetryCount>-1</RetryCount>
+    <Text></Text>
+    <_activityFullName>BR.Core.Base.Container</_activityFullName>
+  </Logic>
+  <Name>core_error_handler.pix</Name>
+  <Namespaces xmlns:d2p1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <Params>
+    <Parameter z:Id="i34">
+      <DefaultValueExpression>new Dictionary&lt;string, object&gt;()</DefaultValueExpression>
+      <Description>Глобальный контекст выполнения приложения. Содержит пути, конфигурации и динамические параметры.</Description>
+      <Name>global_context</Name>
+      <RunnerType>None</RunnerType>
+      <TypeString>System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]</TypeString>
+    </Parameter>
+    <Parameter z:Id="i35">
+      <DefaultValueExpression>default(System.Exception)</DefaultValueExpression>
+      <Description>Объект ошибки при транзакционной обработке</Description>
+      <Name>transaction_handling_error</Name>
+      <RunnerType>None</RunnerType>
+      <TypeString>System.Exception</TypeString>
+    </Parameter>
+    <Parameter z:Id="i36">
+      <DefaultValueExpression>string.Empty</DefaultValueExpression>
+      <Description>Источник ошибки при транзакционной обработке</Description>
+      <Name>transactions_error_source</Name>
+      <RunnerType>None</RunnerType>
+      <TypeString>System.String</TypeString>
+    </Parameter>
+    <Parameter z:Id="i37">
+      <DefaultValueExpression>-1</DefaultValueExpression>
+      <Description>Счетчик текущих попыток</Description>
+      <Name>retry_counter</Name>
+      <RunnerType>None</RunnerType>
+      <TypeString>System.Int32</TypeString>
+    </Parameter>
+    <Parameter z:Id="i38">
+      <DefaultValueExpression>3</DefaultValueExpression>
+      <Description>Максимальное число подряд идущих ошибок перед прерыванием процесса робота</Description>
+      <Name>max_serial_errors</Name>
+      <RunnerType>None</RunnerType>
+      <TypeString>System.Int32</TypeString>
+    </Parameter>
+    <Parameter z:Id="i39">
+      <DefaultValueExpression>new List&lt;string&gt;()</DefaultValueExpression>
+      <Description>Список накопленных ошибок при обработке (N подряд)</Description>
+      <Name>errors_history</Name>
+      <RunnerType>None</RunnerType>
+      <TypeString>System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]</TypeString>
+    </Parameter>
+    <Parameter z:Id="i40">
+      <DefaultValueExpression>string.Empty</DefaultValueExpression>
+      <Description>Сообщение об ошибке при транзакционной обработке</Description>
+      <Name>transactions_error_message</Name>
+      <RunnerType>None</RunnerType>
+      <TypeString>System.String</TypeString>
+    </Parameter>
+    <Parameter z:Id="i41">
+      <DefaultValueExpression>string.Empty</DefaultValueExpression>
+      <Description>Скриншот ошибки по текущей попытке</Description>
+      <Name>screenshot_retry_counter_file</Name>
+      <RunnerType>None</RunnerType>
+      <TypeString>System.String</TypeString>
+    </Parameter>
+  </Params>
+  <PlatformVersion xmlns:d2p1="http://schemas.datacontract.org/2004/07/System" xmlns="">
+    <d2p1:_Build>1</d2p1:_Build>
+    <d2p1:_Major>3</d2p1:_Major>
+    <d2p1:_Minor>2</d2p1:_Minor>
+    <d2p1:_Revision>0</d2p1:_Revision>
+  </PlatformVersion>
+  <TemplateVersion xmlns:d2p1="http://schemas.datacontract.org/2004/07/System" i:nil="true" />
+  <Variables xmlns:d2p1="http://schemas.datacontract.org/2004/07/BR.Logic.Params">
+    <d2p1:Variable z:Id="i42">
+      <d2p1:DefaultValueExpression>"core_error_handler.pix"</d2p1:DefaultValueExpression>
+      <d2p1:Description>Наименование текущего скрипта, используется в логировании.</d2p1:Description>
+      <d2p1:Name>script_name</d2p1:Name>
+      <d2p1:TypeString>System.String</d2p1:TypeString>
+    </d2p1:Variable>
+  </Variables>
+  <Version i:nil="true" />
+</Script>

@@ -1,0 +1,12 @@
+# Runtime data
+/data/errors/
+/data/logs/
+/data/transactions/
+/data/tmp/
+
+# Local IDE and operating-system state
+/.vs/
+*.user
+*.suo
+Thumbs.db
+.DS_Store
